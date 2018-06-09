@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Shelly</string>
+    <string name="welcoming_text">Hi there&lt;font color="#1DD3AE"&gt;.&lt;/font&gt;</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
+</resources>

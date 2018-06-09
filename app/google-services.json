@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "409251035564",
+    "firebase_url": "https://shelly-764b2.firebaseio.com",
+    "project_id": "shelly-764b2",
+    "storage_bucket": "shelly-764b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409251035564:android:25bfceddc2019869",
+        "android_client_info": {
+          "package_name": "com.shelly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409251035564-kaf5vpe4c1k3slba3398hirc41qhsb1k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shelly",
+            "certificate_hash": "081d4e54f6d913b7c0a7d9ed61579fd45545aedd"
+          }
+        },
+        {
+          "client_id": "409251035564-41adutlb607t8ef11s688rvv3aqdkh0k.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "409251035564-41adutlb607t8ef11s688rvv3aqdkh0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk2VOVoalpXEZcjFQHkv74p7PxLy3WHdY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409251035564-41adutlb607t8ef11s688rvv3aqdkh0k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
