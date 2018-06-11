@@ -23,7 +23,7 @@ public class AccountRegisterActivity extends AppCompatActivity {
         mFinishActivityBtn = findViewById(R.id.FinishRegisterBtn);
 
         mAccountTypeIV = (ImageView) mAmbassadorView.findViewById(R.id.AccountTypeImageView);
-        mAccountTypeIV.setBackground(R.drawable.ic_member);
+        mAccountTypeIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_ambassador));
 
 
 
