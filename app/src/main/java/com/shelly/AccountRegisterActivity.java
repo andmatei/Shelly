@@ -12,11 +12,17 @@ import java.util.HashMap;
 
 public class AccountRegisterActivity extends AppCompatActivity {
 
+    //Views
     ImageButton mFinishActivityBtn;
     View mAmbassadorView;
     View mMemberView;
     ImageView mAccountTypeIV;
-    private boolean mMemberAccountType = false;
+
+    //Resources
+    LayerDrawable layerDrawable;
+
+    //Variables
+    private boolean mMemberAccountType = true;
     private HashMap<String, String> mUserData;
 
     @Override
@@ -24,10 +30,15 @@ public class AccountRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_register);
         mUserData = (HashMap<String, String>) getIntent().getSerializableExtra("UserData");
+        layerDrawable = (LayerDrawable) getResources().getDrawable(R.drawable.bg_cardview_account_type);
+
 
         mAmbassadorView = findViewById(R.id.AmbassadorCardview);
         mMemberView = findViewById(R.id.MemberCardview);
         mFinishActivityBtn = findViewById(R.id.FinishRegisterBtn);
+
+        mMemberView.findViewById(R.id.BackgroundConstraintLayout).setBackground(layerDrawable.findDrawableByLayerId(R.id.bgSelectedType));
+        mMemberView.findViewById(R.id.SelectedType).setVisibility(View.VISIBLE);
 
         mAccountTypeIV = (ImageView) mAmbassadorView.findViewById(R.id.AccountTypeImageView);
         mAccountTypeIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_ambassador));
@@ -36,7 +47,6 @@ public class AccountRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAmbassadorView.findViewById(R.id.SelectedType).setVisibility(View.VISIBLE);
-                LayerDrawable ld = (LayerDrawable) getResources().getDrawable(R.drawable.bg_cardview_account_type);
                 mAmbassadorView.findViewById(R.id.BackgroundConstraintLayout).setBackground(ld.findDrawableByLayerId(R.id.bgSelectedType));
                 mMemberView.findViewById(R.id.BackgroundConstraintLayout).setBackground(ld.findDrawableByLayerId(R.id.bgNotSelectedType));
                 mMemberView.findViewById(R.id.SelectedType).setVisibility(View.GONE);
