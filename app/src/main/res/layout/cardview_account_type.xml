@@ -57,7 +57,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/segoe_ui_semilight_610"
                 android:gravity="center"
-                android:text="Become a Member"
+                android:text="@string/member_account_type_title"
                 android:textColor="@color/textColor"
                 android:textSize="18sp" />
 
@@ -70,7 +70,7 @@
                 android:fontFamily="@font/segoe_ui_semilight_610"
                 android:gravity="center"
                 android:lineSpacingMultiplier="0.9"
-                android:text="@string/lorem_ipsum"
+                android:text="@string/member_account_type_description"
                 android:textSize="14sp" />
 
 

@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">Shelly</string>
     <string name="welcoming_text">Hi there&lt;font color="#1DD3AE"&gt;.&lt;/font&gt;</string>
+    <string name="accout_type_text">Account Type&lt;font color="#1DD3AE"&gt;.&lt;/font&gt;</string>
+
+    <string name="member_account_type_title">Become a Member</string>
+    <string name="member_account_type_description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
+    <string name="ambassador_account_type_title">Become an Ambassador</string>
+    <string name="ambassador_account_type_description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
+
+    <string name="set_up_member_title">Take a quick test</string>
+    <string name="set_up_member_description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
+    <string name="set_up_ambassador_title">Choose a domain</string>
+    <string name="set_up_ambassador_description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
+
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
 </resources>
