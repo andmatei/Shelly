@@ -15,11 +15,11 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="autoMirrored" value="true" />
-                            <entry key="height" value="1334" />
-                            <entry key="outputName" value="ic_accounttypebackground" />
+                            <entry key="height" value="312" />
+                            <entry key="outputName" value="ic_ambassador" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\Elena Matei\Desktop\AccountTypeBackground.svg" />
-                            <entry key="width" value="750" />
+                            <entry key="sourceFile" value="C:\Users\Elena Matei\Desktop\AmbassadorIcon.svg" />
+                            <entry key="width" value="326" />
                           </map>
                         </option>
                       </PersistentState>

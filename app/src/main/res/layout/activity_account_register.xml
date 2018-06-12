@@ -11,47 +11,51 @@
         android:id="@+id/AccountTypeTextView"
         android:layout_width="270dp"
         android:layout_height="125dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/segoeuib"
         android:lineSpacingMultiplier="0.8"
         android:text="Account Type."
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView2"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
         android:fillViewport="true"
         android:minHeight="100dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/FinishRegisterBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/AccountTypeTextView">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingLeft="48dp"
-            android:paddingRight="48dp">
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp">
 
             <include
                 android:id="@+id/MemberCardview"
-                layout="@layout/cardview_account_type" />
-
+                layout="@layout/cardview_account_type"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
             <include
                 android:id="@+id/AmbassadorCardview"
-                layout="@layout/cardview_account_type" />
+                layout="@layout/cardview_account_type"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
-
     </HorizontalScrollView>
 
     <ImageButton

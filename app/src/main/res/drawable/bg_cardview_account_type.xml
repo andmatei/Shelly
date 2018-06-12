@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bgSelectedType">
         <shape>
             <corners android:radius="8dp"/>
             <solid android:color="@android:color/white"/>
@@ -8,10 +8,10 @@
                 android:color="@color/colorPrimary"/>
         </shape>
     </item>
-    <item>
+    <item android:id="@+id/bgNotSelectedType">
         <shape>
             <corners android:radius="8dp"/>
             <solid android:color="@android:color/white"/>
         </shape>
     </item>
-</selector>
+</layer-list>
