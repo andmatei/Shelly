@@ -10,8 +10,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 
 public class AccountRegisterActivity extends AppCompatActivity {
@@ -33,7 +31,7 @@ public class AccountRegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_register);
+        setContentView(R.layout.activity_account_type);
 
         //Varables binding
         mUserData = (HashMap<String, String>) getIntent().getSerializableExtra("UserData");

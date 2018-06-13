@@ -61,11 +61,19 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="autoMirrored" value="true" />
+<<<<<<< HEAD
                             <entry key="height" value="1334" />
                             <entry key="outputName" value="bg_final_set_up" />
                             <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\Elena Matei\Desktop\FinalSetUpBackground.svg" />
                             <entry key="width" value="750" />
+=======
+                            <entry key="height" value="202" />
+                            <entry key="outputName" value="btn_forward" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\scoic\Desktop\Shelly\Assets\btn_forward.svg" />
+                            <entry key="width" value="221" />
+>>>>>>> 4851cf7681300ef3348a744eb9f8fcd5f94d99c1
                           </map>
                         </option>
                       </PersistentState>

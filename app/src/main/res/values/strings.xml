@@ -14,4 +14,5 @@
     <string name="set_up_ambassador_description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
+    <string name="ambassador_text">Nice to meet you, Ambassador.</string>
 </resources>
