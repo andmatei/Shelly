@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_final_setup">
+
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingEnd="48dp"
         android:paddingLeft="48dp"
         android:paddingRight="48dp"
         android:paddingStart="48dp"
-        android:paddingEnd="48dp"
-        tools:context=".FinalSetUp"
-        android:layout_gravity="center">
+        tools:context=".FinalSetUp">
 
         <ImageView
             android:id="@+id/SetUpImageView"
@@ -42,7 +43,7 @@
             android:gravity="center"
             android:text="@string/set_up_member_title"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp"
+            android:textSize="28sp"
             app:layout_constraintDimensionRatio="w,2:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:fontFamily="@font/segoe_ui_semilight_610"
             android:gravity="center"
             android:text="@string/set_up_member_description"
             android:textColor="@color/textColor"
@@ -66,6 +68,10 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/btn_primary_color_rounded"
             android:elevation="4dp"

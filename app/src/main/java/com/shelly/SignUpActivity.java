@@ -22,12 +22,15 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    //Views
     ImageButton mBackBtn;
     Button mSignUpBtn;
     private EditText mEmailET;
     private EditText mPasswordET;
     private EditText mConfirmPasswordET;
     private EditText mUsernameEt;
+
+    //Firebase
     private FirebaseAuth mAuth;
 
     @Override
@@ -35,8 +38,10 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        //Firebase Binding
         mAuth = FirebaseAuth.getInstance();
 
+        //Views Binding
         mBackBtn = (ImageButton) findViewById(R.id.BackImageButton);
         mSignUpBtn = (Button) findViewById(R.id.SignUpButton);
         mEmailET = (EditText) findViewById(R.id.EmailEditText);
@@ -44,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
         mConfirmPasswordET = (EditText) findViewById(R.id.ConfirmPasswordEditText);
         mUsernameEt = (EditText) findViewById(R.id.UsernameEditText);
 
+        //Implementing Functionalities
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

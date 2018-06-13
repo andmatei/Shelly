@@ -20,11 +20,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LogInActivity extends AppCompatActivity {
 
+    //Views
     ImageButton mBackBtn;
     Button mLogInBtn;
     private EditText mEmailET;
     private EditText mPasswordET;
-    private Button mForgotPasswordBtn;
+    Button mForgotPasswordBtn;
+
+    //Firebase
     private FirebaseAuth mAuth;
 
     @Override
@@ -32,14 +35,17 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        //Firebase Binding
         mAuth = FirebaseAuth.getInstance();
 
+        //Views Binding
         mBackBtn = (ImageButton) findViewById(R.id.BackImageButton);
         mLogInBtn = (Button) findViewById(R.id.LogInButton);
         mEmailET = (EditText) findViewById(R.id.EmailEditText);
         mPasswordET = (EditText) findViewById(R.id.PasswordEditText);
         mForgotPasswordBtn = (Button) findViewById(R.id.ForgotPasswordButton);
 
+        //Implementing Functionalities
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +62,7 @@ public class LogInActivity extends AppCompatActivity {
                 String Password = mPasswordET.getText().toString();
                 if(TextUtils.isEmpty(Email)) {
                     Toast.makeText(LogInActivity.this, "Please enter email address", Toast.LENGTH_SHORT).show();
+                    mEmailET.setError("Required");
                     return;
                 }
                 else if(TextUtils.isEmpty(Password)) {
