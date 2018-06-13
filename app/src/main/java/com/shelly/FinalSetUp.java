@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 public class FinalSetUp extends AppCompatActivity {
@@ -48,9 +47,9 @@ public class FinalSetUp extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = null;
                 if(mUserData.get("Type").equals("Ambassador")) {
-                    i = new Intent(FinalSetUp.this, MainActivity.class);
+                    i = new Intent(FinalSetUp.this, DomainActivity.class);
                 } else if(mUserData.get("Type").equals("Member")) {
-                    i = new Intent(FinalSetUp.this, MainActivity.class);
+                    i = new Intent(FinalSetUp.this, TestActivity.class);
                 }
                 if(i!=null) {
                     i.putExtra("UserData", mUserData);

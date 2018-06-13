@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
-public class AccountRegisterActivity extends AppCompatActivity {
+public class AccountTypeActivity extends AppCompatActivity {
 
     //Views
     ImageButton mFinishActivityBtn;
@@ -85,7 +85,7 @@ public class AccountRegisterActivity extends AppCompatActivity {
                 } else {
                     mUserData.put("Type", "Ambassador");
                 }
-                Intent i = new Intent(AccountRegisterActivity.this, FinalSetUp.class);
+                Intent i = new Intent(AccountTypeActivity.this, FinalSetUp.class);
                 i.putExtra("UserData", mUserData);
                 startActivity(i);
             }

@@ -16,9 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -96,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                             mUserData.put("Email", Email);
                             mUserData.put("Password", Password);
                             mUserData.put("Username", Username);
-                            Intent i = new Intent(SignUpActivity.this, AccountRegisterActivity.class);
+                            Intent i = new Intent(SignUpActivity.this, AccountTypeActivity.class);
                             i.putExtra("UserData", mUserData);
                             startActivity(i);
 

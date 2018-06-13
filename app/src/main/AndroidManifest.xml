@@ -27,7 +27,7 @@
             android:name=".SignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AccountRegisterActivity"
+            android:name=".AccountTypeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
@@ -35,7 +35,8 @@
         <activity
             android:name=".FinalSetUp"
             android:screenOrientation="portrait" />
-        <activity android:name=".AmbassadorActivity"></activity>
+        <activity android:name=".DomainActivity" />
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>

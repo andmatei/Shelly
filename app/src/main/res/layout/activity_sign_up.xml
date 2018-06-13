@@ -69,7 +69,7 @@
             android:elevation="2dp"
             android:fontFamily="@font/seguisb"
             android:hint="Username"
-            android:inputType="none"
+            android:inputType="text"
             android:padding="12dp"
             android:textColor="@color/grayAccent"
             android:textSize="14sp" />

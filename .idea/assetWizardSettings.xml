@@ -3,52 +3,6 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
-        <entry key="imageWizard">
-          <value>
-            <PersistentState>
-              <option name="children">
-                <map>
-                  <entry key="imageAssetPanel">
-                    <value>
-                      <PersistentState>
-                        <option name="children">
-                          <map>
-                            <entry key="launcher">
-                              <value>
-                                <PersistentState>
-                                  <option name="children">
-                                    <map>
-                                      <entry key="foregroundImage">
-                                        <value>
-                                          <PersistentState>
-                                            <option name="values">
-                                              <map>
-                                                <entry key="scalingPercent" value="70" />
-                                              </map>
-                                            </option>
-                                          </PersistentState>
-                                        </value>
-                                      </entry>
-                                    </map>
-                                  </option>
-                                  <option name="values">
-                                    <map>
-                                      <entry key="foregroundImage" value="C:\Users\scoic\Desktop\Shelly\Assets\ic_launcher.svg" />
-                                    </map>
-                                  </option>
-                                </PersistentState>
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </PersistentState>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PersistentState>
-          </value>
-        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -60,20 +14,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="autoMirrored" value="true" />
-<<<<<<< HEAD
                             <entry key="height" value="1334" />
-                            <entry key="outputName" value="bg_final_set_up" />
+                            <entry key="outputName" value="ic_bg_domain" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\Elena Matei\Desktop\FinalSetUpBackground.svg" />
+                            <entry key="sourceFile" value="C:\Users\scoic\Desktop\Shelly\Assets\bg_domain.svg" />
                             <entry key="width" value="750" />
-=======
-                            <entry key="height" value="202" />
-                            <entry key="outputName" value="btn_forward" />
-                            <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\scoic\Desktop\Shelly\Assets\btn_forward.svg" />
-                            <entry key="width" value="221" />
->>>>>>> 4851cf7681300ef3348a744eb9f8fcd5f94d99c1
                           </map>
                         </option>
                       </PersistentState>
