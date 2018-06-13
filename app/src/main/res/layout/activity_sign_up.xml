@@ -11,8 +11,8 @@
 
     <ImageButton
         android:id="@+id/BackImageButton"
-        android:layout_width="35dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
         android:background="@drawable/ic_back"
         app:layout_constraintBottom_toTopOf="@+id/SignUpTextView"
         app:layout_constraintStart_toStartOf="parent" />

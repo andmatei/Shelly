@@ -13,18 +13,22 @@ import org.w3c.dom.Text;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private Button mLogInBtn;
-    private Button mSignUpBtn;
-    private TextView mWelcomeTitleTV;
+    //Views
+    Button mLogInBtn;
+    Button mSignUpBtn;
+    TextView mWelcomeTitleTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        //Views Binding
         mLogInBtn = (Button) findViewById(R.id.LogInBtn);
         mSignUpBtn = (Button) findViewById(R.id.SignUpBtn);
         mWelcomeTitleTV = (TextView) findViewById(R.id.WelcomeTextView);
 
+        //Implementing Functionalities
         mWelcomeTitleTV.setText(Html.fromHtml(getResources().getString(R.string.welcoming_text)));
         mLogInBtn.setOnClickListener(new View.OnClickListener() {
             @Override

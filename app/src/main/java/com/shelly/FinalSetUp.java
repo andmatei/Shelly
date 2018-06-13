@@ -14,10 +14,10 @@ import java.util.HashMap;
 public class FinalSetUp extends AppCompatActivity {
 
     //Views
-    private ImageView mAccountTypeIV;
-    private TextView mTaskTitleTV;
-    private TextView mTaskDescriptionTV;
-    private Button mStartActivityBtn;
+    ImageView mAccountTypeIV;
+    TextView mTaskTitleTV;
+    TextView mTaskDescriptionTV;
+    Button mStartActivityBtn;
 
     //UserData
     private HashMap<String, String> mUserData = new HashMap<>();
@@ -36,8 +36,8 @@ public class FinalSetUp extends AppCompatActivity {
         mTaskDescriptionTV = findViewById(R.id.SetUpDescriprionTextView);
         mStartActivityBtn = findViewById(R.id.StartActivityButton);
 
-        //Assign function
-        if(mUserData.get("Type").toString().equals("Ambassador")) {
+        //Implementing Functionalities
+        if(mUserData.get("Type").equals("Ambassador")) {
             mAccountTypeIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_ambassador));
             mTaskTitleTV.setText(getResources().getString(R.string.set_up_ambassador_title));
             mTaskDescriptionTV.setText(getResources().getString(R.string.set_up_ambassador_description));
@@ -47,13 +47,15 @@ public class FinalSetUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = null;
-                if(mUserData.get("Type").toString().equals("Ambassador")) {
+                if(mUserData.get("Type").equals("Ambassador")) {
                     i = new Intent(FinalSetUp.this, MainActivity.class);
-                } else if(mUserData.get("Type").toString().equals("Member")) {
+                } else if(mUserData.get("Type").equals("Member")) {
                     i = new Intent(FinalSetUp.this, MainActivity.class);
                 }
-                i.putExtra("UserData", mUserData);
-                startActivity(i);
+                if(i!=null) {
+                    i.putExtra("UserData", mUserData);
+                    startActivity(i);
+                }
             }
         });
     }
