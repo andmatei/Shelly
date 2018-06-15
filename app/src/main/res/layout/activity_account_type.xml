@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/AccountTypeTextView"
+        android:paddingLeft="8dp"
         android:layout_width="270dp"
         android:layout_height="100dp"
         android:layout_marginLeft="40dp"
