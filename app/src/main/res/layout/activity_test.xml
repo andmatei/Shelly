@@ -62,9 +62,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="@id/TestQuestionTextView"
             app:layout_constraintRight_toRightOf="@id/TestQuestionTextView"
-            app:layout_constraintTop_toBottomOf="@+id/QuestionElementsTextView"
-
-           />
+            app:layout_constraintTop_toBottomOf="@+id/QuestionElementsTextView" />
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

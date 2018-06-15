@@ -14,11 +14,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="1334" />
-                            <entry key="outputName" value="ic_bg_domain" />
+                            <entry key="height" value="130" />
+                            <entry key="outputName" value="ic_unselected_domain" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\scoic\Desktop\Shelly\Assets\bg_domain.svg" />
-                            <entry key="width" value="750" />
+                            <entry key="sourceFile" value="C:\Users\scoic\Desktop\Shelly\Assets\ic_unselected_domain.svg" />
+                            <entry key="width" value="128" />
                           </map>
                         </option>
                       </PersistentState>
