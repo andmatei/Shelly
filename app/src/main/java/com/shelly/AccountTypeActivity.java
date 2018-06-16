@@ -56,7 +56,7 @@ public class AccountTypeActivity extends AppCompatActivity {
         TextView textView = (TextView) mAmbassadorView.findViewById(R.id.AccountTypeTextView);
         textView.setText(R.string.ambassador_account_type_title);
         textView = (TextView) mAmbassadorView.findViewById(R.id.AccountDescriptionTextView);
-        textView.setText(R.string.ambassador_account_type_description);
+        textView.setText(R.string.become_an_ambassador_text);
 
         //Implementing functionalities
         mAmbassadorView.setOnClickListener(new View.OnClickListener() {

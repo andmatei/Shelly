@@ -22,9 +22,9 @@
             android:id="@+id/SetUpImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            android:maxHeight="100dp"
-            android:maxWidth="100dp"
+            android:layout_marginTop="32dp"
+            android:maxHeight="60dp"
+            android:maxWidth="60dp"
             android:src="@drawable/ic_member"
             app:layout_constraintDimensionRatio="3:2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,12 +39,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/segoeuib"
             android:gravity="center"
             android:text="@string/set_up_member_title"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="28sp"
+            android:textSize="24sp"
             app:layout_constraintDimensionRatio="w,2:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,12 +54,12 @@
             android:id="@+id/SetUpDescriprionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/segoe_ui_semilight_610"
             android:gravity="center"
-            android:text="@string/set_up_member_description"
+            android:text="@string/take_test_text"
             android:textColor="@color/textColor"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SetUpTextView" />
@@ -68,7 +68,7 @@
             android:id="@+id/StartActivityButton"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -88,6 +88,3 @@
 
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>
-
-
-
