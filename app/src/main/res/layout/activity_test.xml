@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context=".TestActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/NextQuestionButton"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/TestEmojiImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginStart="56dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginLeft="48dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_emoji0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,14 +29,16 @@
             android:id="@+id/TestQuestionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="56dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginRight="48dp"
             android:layout_marginEnd="48dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="48dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/segoeuib"
             android:text="How often, in the last two weeks, did you feel..."
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="32sp"
+            android:textSize="28sp"
+            android:maxWidth="50dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,25 +52,86 @@
             android:layout_marginRight="8dp"
             android:fontFamily="@font/segoe_ui"
             android:text="panicky"
-            android:textSize="32sp"
-            android:textStyle="italic"
             android:textColor="@color/colorPrimaryDark"
+            android:textSize="28sp"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@+id/TestQuestionTextView"
             app:layout_constraintStart_toStartOf="@+id/TestQuestionTextView"
             app:layout_constraintTop_toBottomOf="@+id/TestQuestionTextView" />
 
-        <SeekBar
-            android:id="@+id/TestSeekbar"
+        <ImageView
             android:layout_width="0dp"
-            android:layout_height="10dp"
-            android:layout_marginTop="32dp"
-            android:max="5"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/asset_dots"
+            app:layout_constraintBottom_toBottomOf="@+id/QuestionElementsTextView"
+            app:layout_constraintEnd_toStartOf="@+id/TestQuestionTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TestQuestionTextView" />
+
+        <SeekBar
+            android:id="@+id/TestSeekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:max="4"
+            android:maxHeight="10dip"
+            android:minHeight="10dip"
+            android:progressDrawable="@drawable/seek_bar_style"
+            android:splitTrack="false"
+            android:thumb="@drawable/seek_bar_thumb"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="@id/TestQuestionTextView"
             app:layout_constraintRight_toRightOf="@id/TestQuestionTextView"
-            app:layout_constraintTop_toBottomOf="@+id/QuestionElementsTextView"
+            app:layout_constraintTop_toBottomOf="@+id/QuestionElementsTextView" />
 
-           />
+        <TextView
+            android:id="@+id/MinValueSeekbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/segoe_ui_semilight_610"
+            android:text="Not at all"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/TestSeekBar"
+            app:layout_constraintTop_toBottomOf="@+id/TestSeekBar" />
+
+        <TextView
+            android:id="@+id/MaxValueSeekbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/segoe_ui_semilight_610"
+            android:text="Extremely"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/TestSeekBar"
+            app:layout_constraintTop_toBottomOf="@+id/TestSeekBar" />
+
     </android.support.constraint.ConstraintLayout>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/NextQuestionButton"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginStart="56dp"
+        android:background="@drawable/btn_primary_color_rounded"
+        android:elevation="4dp"
+        android:fontFamily="@font/seguisb"
+        android:text="Next question"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

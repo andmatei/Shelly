@@ -14,11 +14,6 @@
         <activity
             android:name=".WelcomeActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".LogInActivity"
@@ -28,15 +23,23 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".AccountTypeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".FinalSetUp"
             android:screenOrientation="portrait" />
-        <activity android:name=".DomainActivity" />
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".DomainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TestActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

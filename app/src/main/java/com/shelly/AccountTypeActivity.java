@@ -34,7 +34,8 @@ public class AccountTypeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account_type);
 
         //Varables binding
-        mUserData = (HashMap<String, String>) getIntent().getSerializableExtra("UserData");
+        //mUserData = (HashMap<String, String>) getIntent().getSerializableExtra("UserData");
+        mUserData = new HashMap<>();
         mLayerDrawable = (LayerDrawable) getResources().getDrawable(R.drawable.bg_cardview_account_type);
 
         //Views binding
@@ -48,6 +49,7 @@ public class AccountTypeActivity extends AppCompatActivity {
         //Member setup
         mMemberView.findViewById(R.id.BackgroundConstraintLayout).setBackground(mLayerDrawable.findDrawableByLayerId(R.id.bgSelectedType));
         mMemberView.findViewById(R.id.SelectedType).setVisibility(View.VISIBLE);
+
         //Ambassador setup
         mAccountTypeIV = (ImageView) mAmbassadorView.findViewById(R.id.AccountTypeImageView);
         mAccountTypeIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_ambassador));
@@ -56,6 +58,7 @@ public class AccountTypeActivity extends AppCompatActivity {
         textView = (TextView) mAmbassadorView.findViewById(R.id.AccountDescriptionTextView);
         textView.setText(R.string.ambassador_account_type_description);
 
+        //Implementing functionalities
         mAmbassadorView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
