@@ -68,7 +68,7 @@ public class TestActivity extends AppCompatActivity {
         mNumQuestion = 0;
         initializeData();
 
-        //Implement functionalities
+        //Implementing functionalities
         mNextQuestionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

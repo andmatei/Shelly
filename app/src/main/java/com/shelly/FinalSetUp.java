@@ -39,7 +39,7 @@ public class FinalSetUp extends AppCompatActivity {
         if(mUserData.get("Type").equals("Ambassador")) {
             mAccountTypeIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_ambassador));
             mTaskTitleTV.setText(getResources().getString(R.string.set_up_ambassador_title));
-            mTaskDescriptionTV.setText(getResources().getString(R.string.choose_domain_text));
+            mTaskDescriptionTV.setText(getResources().getString(R.string.set_up_ambassador_description));
         }
         
         mStartActivityBtn.setOnClickListener(new View.OnClickListener() {
