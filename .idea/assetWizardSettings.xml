@@ -3,6 +3,55 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState>
+              <option name="children">
+                <map>
+                  <entry key="imageAssetPanel">
+                    <value>
+                      <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="actionbar">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\Elena Matei\Desktop\DotsAsset.png" />
+                                      <entry key="outputName" value="asset_dots" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                            <entry key="launcher">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="foregroundImage" value="C:\Users\Elena Matei\Desktop\DotsAsset.png" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </PersistentState>
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -14,11 +63,11 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="height" value="130" />
-                            <entry key="outputName" value="ic_unselected_domain" />
+                            <entry key="height" value="308" />
+                            <entry key="outputName" value="asset_dpots_large" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\scoic\Desktop\Shelly\Assets\ic_unselected_domain.svg" />
-                            <entry key="width" value="128" />
+                            <entry key="sourceFile" value="C:\Users\Elena Matei\Desktop\DotsAssetLarge.svg" />
+                            <entry key="width" value="91" />
                           </map>
                         </option>
                       </PersistentState>

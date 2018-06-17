@@ -12,33 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".Activities.WelcomeActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".LogInActivity"
+            android:name=".Activities.LogInActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".Activities.SignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AccountTypeActivity"
+            android:name=".Activities.AccountTypeActivity"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.FinalSetUpActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activities.DomainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".FinalSetUp"
-            android:screenOrientation="portrait" />
-        <activity android:name=".DomainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".TestActivity"
+        <activity android:name=".Activities.TestActivity"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -7,7 +7,7 @@
     android:paddingLeft="48dp"
     android:paddingRight="48dp"
     android:background="@drawable/bg_log_in_activity"
-    tools:context=".LogInActivity">
+    tools:context=".Activities.LogInActivity">
 
     <ImageButton
         android:id="@+id/BackImageButton"

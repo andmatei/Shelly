@@ -7,7 +7,7 @@
     android:paddingRight="48dp"
     android:background="@drawable/bg_welcome_activity"
     android:paddingLeft="48dp"
-    tools:context=".WelcomeActivity">
+    tools:context=".Activities.WelcomeActivity">
 
     <ImageView
         android:id="@+id/LogoImageView"

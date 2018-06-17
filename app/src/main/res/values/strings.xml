@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Shelly</string>
-    <string name="welcoming_text">Hi there&lt;font color="#1DD3AE"&gt;.&lt;/font&gt;</string>
-    <string name="accout_type_text">Account Type&lt;font color="#1DD3AE"&gt;.&lt;/font&gt;</string>
+    <string name="welcoming_text">Hi there&lt;font color=\'#1DD3AE\'&gt;.&lt;/font&gt;</string>
+    <string name="accout_type_text">Account Type&lt;font color=\'#1DD3AE\'&gt;.&lt;/font&gt;</string>
 
     <string name="member_account_type_title">Become a Member</string>
     <string name="member_account_type_description">The members are the ones that are seeking for help or comfort from other people and in return give the same. You are able to keep your own thoughts and feelings in a private diary. The application gives you the opportunity to discuss with Ambassadors, which are psychologists, and ask them for help. You can also help other members by posting on our mini socialising platform.</string>
@@ -13,7 +13,20 @@
     <string name="set_up_ambassador_title">Choose a domain</string>
     <string name="set_up_ambassador_description">In order to help you, we kindly request you to take the following test, approved by people working in this domain. The test consists of 20 questions representing emotions felt by you in the last couple of weeks and you have to choose the intensity, starting from not at all to extremely.</string>
 
+    <string name="choose_your_domains">Choose your <i>domains</i></string>
+
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
     <string name="ambassador_text">Nice to meet you, Ambassador.</string>
+
+    <!--Firebase fields-->
+    <string name="dbfield_users">Users</string>
+    <string name="dbfield_user_username">username</string>
+    <string name="dbfield_user_accounttype">accountType</string>
+    <string name="dbfield_test_resources">TestResources</string>
+    <string name="dbfield_test_questions">TestQuestions</string>
+    <string name="dbfield_test_factors">Factors</string>
+    <string name="dbfield_members">Members</string>
+    <string name="dbfield_members_testresults">TestResults</string>
+    <string name="dbfield_ambassadors">Ambassadors</string>
 
 </resources>

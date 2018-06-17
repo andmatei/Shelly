@@ -16,7 +16,7 @@
         android:paddingLeft="48dp"
         android:paddingRight="48dp"
         android:paddingStart="48dp"
-        tools:context=".FinalSetUp">
+        tools:context=".Activities.FinalSetUpActivity">
 
         <ImageView
             android:id="@+id/SetUpImageView"
@@ -39,7 +39,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/segoeuib"
             android:gravity="center"
             android:text="@string/set_up_member_title"
@@ -54,12 +54,12 @@
             android:id="@+id/SetUpDescriprionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/segoe_ui_semilight_610"
             android:gravity="center"
             android:text="@string/set_up_member_description"
             android:textColor="@color/textColor"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SetUpTextView" />
@@ -68,7 +68,7 @@
             android:id="@+id/StartActivityButton"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"

@@ -1,4 +1,4 @@
-package com.shelly;
+package com.shelly.Utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,8 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import com.shelly.R;
 
 import java.util.List;
 

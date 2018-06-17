@@ -4,94 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_bg_domain"
-    tools:context=".DomainActivity">
+    tools:context=".Activities.DomainActivity">
 
-    <ImageButton
-        android:id="@+id/ContinueBtn"
-        android:layout_width="100dp"
-        android:layout_height="90dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/btn_forward"
-        android:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/PreviousBtn"
-        android:layout_width="100dp"
-        android:layout_height="90dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:background="@drawable/btn_backward"
-        android:elevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/AmbassadorText"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/segoe_ui"
-        android:text="@string/ambassador_text"
-        android:textColor="@color/textColor"
-        android:textSize="35sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/ChooseText"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginTop="24dp"
-        android:fontFamily="@font/segoe_ui"
-        android:text="Choose your domain."
-        android:textColor="@color/textColor"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.201"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AmbassadorText" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/DomainText"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/segoe_ui"
-        android:text="@string/lorem_ipsum"
-        android:textColor="@color/textColor"
+        <TextView
+            android:id="@+id/DomainTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="56dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/segoeuib"
+            android:maxWidth="280dp"
+            android:text="Choose your domain"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="32sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/asset_dots"
+            app:layout_constraintBottom_toBottomOf="@+id/DomainTitleTextView"
+            app:layout_constraintEnd_toStartOf="@+id/DomainTitleTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/DomainTitleTextView" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/FinishSetUpButton"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginStart="56dp"
+        android:background="@drawable/btn_primary_color_rounded"
+        android:elevation="4dp"
+        android:fontFamily="@font/seguisb"
+        android:text="Finish set up"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ChooseText" />
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DomainText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

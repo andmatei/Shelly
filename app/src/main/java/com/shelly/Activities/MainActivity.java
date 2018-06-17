@@ -1,7 +1,9 @@
-package com.shelly;
+package com.shelly.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.shelly.R;
 
 public class MainActivity extends AppCompatActivity {
 
