@@ -22,11 +22,19 @@
     <string name="dbfield_users">Users</string>
     <string name="dbfield_user_username">username</string>
     <string name="dbfield_user_accounttype">accountType</string>
+
+    <string name="dbfield_resources">Resources</string>
+    
     <string name="dbfield_test_resources">TestResources</string>
     <string name="dbfield_test_questions">TestQuestions</string>
     <string name="dbfield_test_factors">Factors</string>
+    
+    <string name="dbfiled_domains_resources">DomainResources</string>
+    <string name="dbfield_domain_list">Domains</string>
+
     <string name="dbfield_members">Members</string>
     <string name="dbfield_members_testresults">TestResults</string>
+
     <string name="dbfield_ambassadors">Ambassadors</string>
 
 </resources>

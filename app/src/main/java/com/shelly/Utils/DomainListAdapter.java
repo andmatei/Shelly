@@ -1,6 +1,7 @@
 package com.shelly.Utils;
 
 import android.content.Context;
+import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -8,53 +9,79 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shelly.R;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class DomainListAdapter extends RecyclerView.Adapter<DomainListAdapter.ViewHolder> {
 
-    private List<String> DomainList;
+    private List<String> mDomainsList;
     private Context mContext;
+    private HashMap<String, Integer> mSelectedDomains;
+
+    public DomainListAdapter(List<String> mDomainsList, Context mContext) {
+        this.mDomainsList = mDomainsList;
+        this.mContext = mContext;
+        this.mSelectedDomains = new HashMap<>();
+        for(int i = 0; i < mDomainsList.size(); i++) {
+            this.mSelectedDomains.put(mDomainsList.get(i), 0);
+        }
+    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.domain_item,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.domain_item, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        final String Domain = DomainList.get(position);
-        holder.mDomainTV.setText(Domain);
-        holder.mWraper.setOnClickListener(new View.OnClickListener() {
+        final LayerDrawable mLayerDrawable = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.bg_domain_checkbox);
+        holder.mDomainTextView.setText(mDomainsList.get(position));
+        holder.mWrapperConstraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.mCheckedDomainIB.setBackground(mContext.getResources().getDrawable(R.drawable.ic_selected_domain));
+                holder.mCheckedDomain = !holder.mCheckedDomain;
+                if(holder.mCheckedDomain) {
+                    holder.mCheckBoxImageView.setBackground(mLayerDrawable.findDrawableByLayerId(R.id.bgDomainSelected));
+                    holder.mCheckBoxImageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_selected_domain));
+                    mSelectedDomains.put(mDomainsList.get(holder.getAdapterPosition()), 1);
+                } else {
+                    holder.mCheckBoxImageView.setBackground(mLayerDrawable.findDrawableByLayerId(R.id.bgDomainUnselected));
+                    holder.mCheckBoxImageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_unselected_domain));
+                    mSelectedDomains.put(mDomainsList.get(holder.getAdapterPosition()), 0);
+                }
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return DomainList.size();
+        return mDomainsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageButton mCheckedDomainIB;
-        public TextView mDomainTV;
-        public ConstraintLayout mWraper;
+    public HashMap<String, Integer> getmSelectedDomains() {
+        return this.mSelectedDomains;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView mDomainTextView;
+        public ImageView mCheckBoxImageView;
+        public ConstraintLayout mWrapperConstraintLayout;
+
+        public boolean mCheckedDomain;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mWraper = itemView.findViewById(R.id.DomainItemWraper);
-            mCheckedDomainIB = itemView.findViewById(R.id.checkedDomainImageBtn);
-            mDomainTV = itemView.findViewById(R.id.domainTextView);
+            mDomainTextView = itemView.findViewById(R.id.DomainTextView);
+            mCheckBoxImageView = itemView.findViewById(R.id.CheckBoxImageView);
+            mWrapperConstraintLayout = itemView.findViewById(R.id.DomainWrapperConstraintLayout);
+            mCheckedDomain = false;
         }
     }
-
 }

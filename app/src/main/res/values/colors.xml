@@ -8,6 +8,7 @@
 
     <color name="grayAccent">#B0B0AE</color>
     <color name="grayAccent50">#50B0B0AE</color>
+    <color name="grayBackground">#EDEEF2</color>
 
     <color name="textColor">#3B3947</color>
     <color name="textColor50">#503B3947</color>

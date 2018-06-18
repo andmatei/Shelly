@@ -92,9 +92,8 @@ public class AccountTypeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAmbassadorView.findViewById(R.id.SelectedType).setVisibility(View.GONE);
-                LayerDrawable ld = (LayerDrawable) getResources().getDrawable(R.drawable.bg_cardview_account_type);
-                mMemberView.findViewById(R.id.BackgroundConstraintLayout).setBackground(ld.findDrawableByLayerId(R.id.bgSelectedType));
-                mAmbassadorView.findViewById(R.id.BackgroundConstraintLayout).setBackground(ld.findDrawableByLayerId(R.id.bgNotSelectedType));
+                mMemberView.findViewById(R.id.BackgroundConstraintLayout).setBackground(mLayerDrawable.findDrawableByLayerId(R.id.bgSelectedType));
+                mAmbassadorView.findViewById(R.id.BackgroundConstraintLayout).setBackground(mLayerDrawable.findDrawableByLayerId(R.id.bgNotSelectedType));
                 mMemberView.findViewById(R.id.SelectedType).setVisibility(View.VISIBLE);
                 mMemberAccountType = true;
             }

@@ -6,42 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".Activities.DomainActivity">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/DomainTitleTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginLeft="56dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/segoeuib"
+        android:maxWidth="280dp"
+        android:text="Choose your domain"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="32sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/DomainTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="56dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/segoeuib"
-            android:maxWidth="280dp"
-            android:text="Choose your domain"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="32sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/asset_dots"
+        app:layout_constraintBottom_toBottomOf="@+id/DomainTitleTextView"
+        app:layout_constraintEnd_toStartOf="@+id/DomainTitleTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/DomainTitleTextView" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/asset_dots"
-            app:layout_constraintBottom_toBottomOf="@+id/DomainTitleTextView"
-            app:layout_constraintEnd_toStartOf="@+id/DomainTitleTextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/DomainTitleTextView" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/DomainsListRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/FinishSetUpButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DomainTitleTextView"/>
 
-    </android.support.constraint.ConstraintLayout>
 
     <Button
         android:id="@+id/FinishSetUpButton"

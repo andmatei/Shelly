@@ -47,7 +47,6 @@ public class TestActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRefDatabase;
     private FirebaseUser mUser;
-    private FirebaseMethods mFirebaseMethods;
 
 
     @Override
@@ -59,7 +58,6 @@ public class TestActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         mRefDatabase = mDatabase.getReference();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
-        mFirebaseMethods = new FirebaseMethods(this);
 
         //Views Binding
         mQuestionTV = (TextView) findViewById(R.id.TestQuestionTextView);
@@ -145,7 +143,7 @@ public class TestActivity extends AppCompatActivity {
         mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.child(getString(R.string.dbfield_test_resources)).child(getString(R.string.dbfield_test_factors)).getChildren()) {
+                for(DataSnapshot ds : dataSnapshot.child(getString(R.string.dbfield_resources)).child(getString(R.string.dbfield_test_resources)).child(getString(R.string.dbfield_test_factors)).getChildren()) {
                     mTestResults.put((String) ds.getValue(), 0);
                     Log.e("TestInitialization", (String) ds.getValue() + " initialized");
                 }
@@ -168,7 +166,7 @@ public class TestActivity extends AppCompatActivity {
         mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds:dataSnapshot.child(getString(R.string.dbfield_test_resources)).child(getString(R.string.dbfield_test_questions)).getChildren()) {
+                for(DataSnapshot ds:dataSnapshot.child(getString(R.string.dbfield_resources)).child(getString(R.string.dbfield_test_resources)).child(getString(R.string.dbfield_test_questions)).getChildren()) {
                     Log.e("Snapshot", ""+ds);
                     QuestionItem  questionItem = ds.getValue(QuestionItem.class);
                     mQuestionList.add(questionItem);
