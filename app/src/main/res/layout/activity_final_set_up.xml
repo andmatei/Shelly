@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/SetUpImageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="200dp"
+            android:layout_height="135dp"
             android:layout_marginTop="32dp"
             android:maxHeight="60dp"
             android:maxWidth="60dp"
@@ -39,7 +39,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/segoeuib"
             android:gravity="center"
             android:text="@string/set_up_member_title"
@@ -59,7 +59,7 @@
             android:gravity="center"
             android:text="@string/set_up_member_description"
             android:textColor="@color/textColor"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SetUpTextView" />
