@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:maxHeight="450dp">
+    android:maxHeight="400dp">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/BackgroundConstraintLayout"
@@ -21,8 +21,8 @@
 
         <ImageView
             android:id="@+id/SelectedType"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
             android:layout_gravity="top|right"
             android:background="@drawable/ic_selected_account_type"
             app:layout_constraintEnd_toEndOf="parent"

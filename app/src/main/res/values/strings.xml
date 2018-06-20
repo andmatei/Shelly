@@ -4,14 +4,14 @@
     <string name="accout_type_text">Account Type&lt;font color=\'#1DD3AE\'&gt;.&lt;/font&gt;</string>
 
     <string name="member_account_type_title">Become a Member</string>
-    <string name="member_account_type_description">The members are the ones that are seeking for help or comfort from other people and in return give the same. You are able to keep your own thoughts and feelings in a private diary. The application gives you the opportunity to discuss with Ambassadors, which are psychologists, and ask them for help. You can also help other members by posting on our mini socialising platform.</string>
+    <string name="member_account_type_description">As a member, you are able to keep your own thoughts and feelings in a private diary or post them on our mini platform, talk with an Ambassador and help others.</string>
     <string name="ambassador_account_type_title">Become an Ambassador</string>
-    <string name="ambassador_account_type_description">As an Ambassador you are given an important mission. You are tasked to help the people that seek for it by giving advice, discuss and offer different activities, either daily or weekly, in a private conversation(ambassador - member) or on the platform to make it easier for people to reach the information.</string>
+    <string name="ambassador_account_type_description">As an ambassador, you are tasked to help the people that seek for it by giving advice, discuss and offer different activities, either daily or weekly, in a private conversation or on the platform.</string>
 
     <string name="set_up_member_title">Take a quick test</string>
-    <string name="set_up_member_description">Due to the fact that depression is one of the main causes for suicides, we kindly request you to chose wisely between 2 and 3 domains of the following, based on your expercience up until now and your professionalism. These domains will be shown on your profile, in order for people to contact you based on your choices.</string>
+    <string name="set_up_member_description">We kindly request you to take the following test, consisting of 20 questions representing emotions felt in the last couple of weeks by choosing the intensity.</string>
     <string name="set_up_ambassador_title">Choose a domain</string>
-    <string name="set_up_ambassador_description">In order to help you, we kindly request you to take the following test, approved by people working in this domain. The test consists of 20 questions representing emotions felt by you in the last couple of weeks and you have to choose the intensity, starting from not at all to extremely.</string>
+    <string name="set_up_ambassador_description">We request you to chose wisely between 2 and 3 domains of the following, based on his expercience up until now and professionalism. These domains will be shown on the ambassador’s account.</string>
 
     <string name="choose_your_domains">Choose your <i>domains</i></string>
 
