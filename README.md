@@ -26,3 +26,6 @@
 <p>Aici se vor gasi toate entriurile facute publice de useri sub forma de postari. Aceste postari pot primi aprecieri si exista si o sectiune de comentarii, unde utilizatorii Member primesc feedback de la Ambassadori si de la alti useri.</p>
 <h3>Chat</h3>
 <p>Aici este sectiunea in care Ambassadorul va oferi Member-ului ajutor si chiar activitati terapeutice care sa se muleze pe ceea ce are nevoie utilizatorul.</p>
+
+<h4>Email: wakandaforever.shelly@gmail.com</h4>
+<h4>Password: qwerty</h4>

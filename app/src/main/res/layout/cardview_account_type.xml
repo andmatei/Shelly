@@ -21,10 +21,11 @@
 
         <ImageView
             android:id="@+id/SelectedType"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="top|right"
-            android:background="@drawable/ic_selected_account_type"
+            android:src="@drawable/ic_selected_account_type"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="gone"/>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:maxHeight="400dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/BackgroundConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_cardview_account_type"
+        android:elevation="5dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,3:4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/BookMarkImageView"
+            android:layout_width="24dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="32dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_bookmark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/SettingImageButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toBottomOf="@+id/BookMarkImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/BookMarkImageView"
+            app:layout_constraintTop_toTopOf="@+id/BookMarkImageView" />
+
+        <TextView
+            android:id="@+id/PostTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/segoeuib"
+            android:text="Lorem ipsum dolor sit amet, consectetuer "
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BookMarkImageView" />
+
+        <ImageView
+            android:id="@+id/CalendarIconImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_calendar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PostTitleTextView" />
+
+        <TextView
+            android:id="@+id/PostedDateTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/segoe_ui_semilight_610"
+            android:text="24 april, 2018"
+            android:textColor="@color/textColor50"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/CalendarIconImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/CalendarIconImageView"
+            app:layout_constraintTop_toTopOf="@+id/CalendarIconImageView" />
+
+        <TextView
+            android:id="@+id/PostSampleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/segoe_ui_semilight_610"
+            android:maxHeight="130dp"
+            android:text="@string/lorem_ipsum"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PostedDateTextView" />
+
+        <ImageView
+            android:id="@+id/PostUnderlineImageView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="56dp"
+            android:background="@color/textColor50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/LikeIconImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_like"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PostUnderlineImageView" />
+
+        <TextView
+            android:id="@+id/NumLikesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/segoe_ui"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="129"
+            android:textColor="@color/textColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/LikeIconImageView"
+            app:layout_constraintStart_toEndOf="@+id/LikeIconImageView"
+            app:layout_constraintTop_toTopOf="@+id/LikeIconImageView" />
+
+        <ImageView
+            android:id="@+id/CommentsIconImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_comment"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            app:layout_constraintStart_toEndOf="@id/NumLikesTextView"
+            app:layout_constraintTop_toTopOf="@id/NumLikesTextView"
+            app:layout_constraintBottom_toBottomOf="@id/NumLikesTextView"/>
+
+        <TextView
+            android:id="@+id/NumCommentsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/segoe_ui"
+            android:text="39"
+            android:textColor="@color/textColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/CommentsIconImageView"
+            app:layout_constraintStart_toEndOf="@+id/CommentsIconImageView"
+            app:layout_constraintTop_toTopOf="@+id/CommentsIconImageView" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

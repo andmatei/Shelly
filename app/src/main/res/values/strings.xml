@@ -32,8 +32,11 @@
     <string name="dbfiled_domains_resources">DomainResources</string>
     <string name="dbfield_domain_list">Domains</string>
 
+    <string name="dbfield_activities">Activities</string>
+
     <string name="dbfield_members">Members</string>
     <string name="dbfield_members_testresults">TestResults</string>
+    <string name="dbfield_members_activities">Activities</string>
 
     <string name="dbfield_ambassadors">Ambassadors</string>
 

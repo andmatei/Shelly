@@ -81,14 +81,15 @@ public class LogInActivity extends AppCompatActivity {
                             Toast.makeText(LogInActivity.this, "Authentification failed", Toast.LENGTH_SHORT).show();
                         } else {
                             try {
-                                if(mAuth.getCurrentUser().isEmailVerified()) {
+                                //if(mAuth.getCurrentUser().isEmailVerified()) {
+                                mFirebaseMethods.UserID = mAuth.getCurrentUser().getUid();
                                     mFirebaseMethods.checkAccountSettingsCompletion();
                                     Intent i = new Intent(LogInActivity.this, MainActivity.class);
                                     startActivity(i);
-                                } else {
+                                /*} else {
                                     Toast.makeText(LogInActivity.this, "Email is not verified. Check your email inbox.", Toast.LENGTH_SHORT).show();
                                     mAuth.signOut();
-                                }
+                                }*/
                             } catch (NullPointerException e) {
                                 Log.e("Exception", "" + e);
                             }

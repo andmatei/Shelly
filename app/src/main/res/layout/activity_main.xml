@@ -1,9 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.MainActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activities.MainActivity">
+    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/MainActivityBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_main_activity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="80dp"
+            app:layout_constraintBottom_toBottomOf="@id/ActivitiesRecyclerView"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/CircleImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="@dimen/margin48dp"
+            android:elevation="5dp"
+            android:src="@drawable/ic_shellylogo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/GreetingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="@dimen/margin48dp"
+            android:layout_marginRight="@dimen/margin48dp"
+            android:layout_marginLeft="@dimen/margin48dp"
+            android:layout_marginStart="@dimen/margin48dp"
+            android:text="Hello,"
+            android:textSize="36sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/segoeuib"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/CircleImageView"
+            app:layout_constraintTop_toBottomOf="@+id/CircleImageView" />
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/GreetingTextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/UsernameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin48dp"
+            android:layout_marginRight="@dimen/margin48dp"
+            android:fontFamily="@font/segoe_ui_semilight_610"
+            android:text="T'Challa"
+            android:textSize="32dp"
+            android:textColor="@android:color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/space" />
+
+        <TextView
+            android:id="@+id/WelcomingTextTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin48dp"
+            android:layout_marginRight="@dimen/margin48dp"
+            android:layout_marginLeft="@dimen/margin48dp"
+            android:layout_marginStart="@dimen/margin48dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/segoe_ui_semilight_610"
+            android:text="@string/lorem_ipsum"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/UsernameTextView" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ActivitiesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_marginTop="32dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            app:layout_constraintTop_toBottomOf="@+id/WelcomingTextTextView" />
+
+        <TextView
+            android:id="@+id/RecommandedPostsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin48dp"
+            android:layout_marginRight="@dimen/margin48dp"
+            android:layout_marginLeft="@dimen/margin48dp"
+            android:layout_marginStart="@dimen/margin48dp"
+            android:layout_marginTop="@dimen/margin48dp"
+            android:fontFamily="@font/segoeuib"
+            android:textColor="@color/textColor"
+            android:textSize="24sp"
+            android:text="Recommanded posts"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ActivitiesRecyclerView"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RecommandedPostsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RecommandedPostsTextView"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>

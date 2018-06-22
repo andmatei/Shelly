@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageButton
+        android:id="@+id/MenuImageButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_menu_btn"
+        android:src="@drawable/ic_menu"
+        android:scaleType="fitCenter"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/ExtendedMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingBottom="64dp"
+        android:paddingTop="32dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/bg_tool_bar"
+        android:elevation="4dp"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="@id/MenuImageButton"
+        app:layout_constraintLeft_toLeftOf="@id/MenuImageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/MenuImageButton">
+
+        <ImageButton
+            android:id="@+id/HomeImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_home"/>
+
+        <ImageButton
+            android:id="@+id/ProfileImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_profile"
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:id="@+id/EntryImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_entry"
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:id="@+id/ProfileSettingsImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_profile_settings"
+            android:scaleType="fitCenter" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
+

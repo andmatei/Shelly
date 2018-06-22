@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/Gradient0">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp"/>
+            <gradient android:angle="-135"
+                android:startColor="@color/AngerStartColor"
+                android:endColor="@color/AngerEndColor"/>
+        </shape>
+    </item>
+    <item android:id="@+id/Gradient1">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp"/>
+            <gradient android:angle="-135"
+                android:startColor="@color/DepressionStartColor"
+                android:endColor="@color/DepressionEndColor"/>
+        </shape>
+    </item>
+    <item android:id="@+id/Gradient2">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp"/>
+            <gradient android:angle="-135"
+                android:startColor="@color/ConfusionStartColor"
+                android:endColor="@color/ConfusionEndColor"/>
+        </shape>
+    </item>
+    <item android:id="@+id/Gradient3">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp"/>
+            <gradient android:angle="-135"
+                android:startColor="@color/FatigueStartColor"
+                android:endColor="@color/FatigueEndtColor"/>
+        </shape>
+    </item>
+    <item android:id="@+id/Gradient4">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp"/>
+            <gradient android:angle="-135"
+                android:startColor="@color/AnxietyStartColor"
+                android:endColor="@color/AnxietyEndColor"/>
+        </shape>
+    </item>
+</layer-list>

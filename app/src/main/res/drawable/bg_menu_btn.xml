@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/bgDomainSelected">
+    <item>
         <shape android:shape="oval">
             <solid android:color="@color/colorPrimary"/>
-        </shape>
-    </item>
-    <item android:id="@+id/bgDomainUnselected">
-        <shape android:shape="oval">
-            <solid android:color="@color/grayBackground"/>
         </shape>
     </item>
 </layer-list>
