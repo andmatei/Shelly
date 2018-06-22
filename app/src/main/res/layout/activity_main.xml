@@ -83,7 +83,7 @@
             android:layout_marginLeft="@dimen/margin48dp"
             android:layout_marginStart="@dimen/margin48dp"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/segoe_ui"
+            android:fontFamily="@font/segoe_ui_semilight_610"
             android:text="@string/lorem_ipsum"
             android:textSize="14sp"
             android:textColor="@android:color/white"
