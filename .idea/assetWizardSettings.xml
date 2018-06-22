@@ -63,11 +63,19 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
+<<<<<<< HEAD
                             <entry key="height" value="1334" />
                             <entry key="outputName" value="bg_edit_mode" />
                             <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\Elena Matei\Desktop\EditModeBackground.svg" />
                             <entry key="width" value="750" />
+=======
+                            <entry key="height" value="89" />
+                            <entry key="outputName" value="ic_back_edit_mode" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\scoic\Desktop\Shelly\Assets\back_edit_mode.svg" />
+                            <entry key="width" value="87" />
+>>>>>>> 336f4bccbfa80cefc6625b4a6f7cc80cd8eed2dd
                           </map>
                         </option>
                       </PersistentState>
