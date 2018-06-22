@@ -13,4 +13,20 @@
     <color name="textColor">#3B3947</color>
     <color name="textColor50">#503B3947</color>
     <color name="textColor75">#753B3947</color>
+
+    <!---Activity colors-->
+    <color name="AngerStartColor">#F08488</color>
+    <color name="AngerEndColor">#C36483</color>
+
+    <color name="DepressionStartColor">#78adf1</color>
+    <color name="DepressionEndColor">#7d6cc7</color>
+
+    <color name="ConfusionStartColor">#ffcf7b</color>
+    <color name="ConfusionEndColor">#c18733</color>
+
+    <color name="FatigueStartColor">#b5a2e4</color>
+    <color name="FatigueEndtColor">#7a51da</color>
+
+    <color name="AnxietyStartColor">#7adfd1</color>
+    <color name="AnxietyEndColor">#1bb0cf</color>
 </resources>
