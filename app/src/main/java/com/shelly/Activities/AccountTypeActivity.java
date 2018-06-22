@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ import java.util.HashMap;
 public class AccountTypeActivity extends AppCompatActivity {
 
     //Views
-    ImageButton mFinishActivityBtn;
+    Button mFinishActivityBtn;
     View mAmbassadorView;
     View mMemberView;
     ImageView mAccountTypeIV;

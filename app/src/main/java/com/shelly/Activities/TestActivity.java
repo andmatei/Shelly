@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.shelly.Models.CurrentActivity;
 import com.shelly.Models.User;
 import com.shelly.Models.UserMember;
 import com.shelly.R;
@@ -25,7 +26,9 @@ import com.shelly.Utils.FirebaseMethods;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -44,6 +47,7 @@ public class TestActivity extends AppCompatActivity {
                 MaxSeekBar;
 
     //Firebase
+    private FirebaseMethods mFirebaseMethods;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRefDatabase;
     private FirebaseUser mUser;
@@ -58,6 +62,7 @@ public class TestActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         mRefDatabase = mDatabase.getReference();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mFirebaseMethods = new FirebaseMethods(this);
 
         //Views Binding
         mQuestionTV = (TextView) findViewById(R.id.TestQuestionTextView);
@@ -93,7 +98,7 @@ public class TestActivity extends AppCompatActivity {
                 mNumElement++;
                 if(mNumQuestion == mQuestionList.size() - 1) {
                     if(mNumElement == mQuestionList.get(mNumQuestion).Elements.size()) {
-                        mRefDatabase.child(getString(R.string.dbfield_members)).child(mUser.getUid()).child(getString(R.string.dbfield_members_testresults)).setValue(mTestResults);
+                        mFirebaseMethods.initializeActivities(mTestResults);
                         Intent i = new Intent(TestActivity.this, MainActivity.class);
                         startActivity(i);
                         finish();

@@ -47,7 +47,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        String auxString = "Day " + mActivityList.get(position).getNumber();
+        String auxString = "Day " + (mActivityList.get(position).getNumber() + 1);
         holder.mActivityTitleTV.setText(auxString);
 
         auxString = "Progress: " + mActivityList.get(position).getProgress() + "%";

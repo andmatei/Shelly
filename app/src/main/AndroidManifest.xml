@@ -41,7 +41,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.TestActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".Activities.EntryActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activities.EditModeActivity"

@@ -64,15 +64,33 @@
             app:layout_constraintTop_toBottomOf="@id/EntryDescriptionTextView" />
 
         <EditText
+            android:id="@+id/SearchFieldEditText"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginBottom="32dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="24dp"
             android:background="@drawable/bg_white_input_field"
             android:elevation="4dp"
-            app:layout_constraintStart_toStartOf="@id/EntryDescriptionTextView"
+            android:hint="Type in  your search"
+            android:textSize="14sp"
+            android:fontFamily="@font/segoe_ui"
+            app:layout_constraintBottom_toBottomOf="@id/Space"
             app:layout_constraintEnd_toEndOf="@id/EntryDescriptionTextView"
-            app:layout_constraintTop_toTopOf="@id/Space"
-            app:layout_constraintBottom_toBottomOf="@id/Space"/>
+            app:layout_constraintStart_toStartOf="@id/EntryDescriptionTextView"
+            app:layout_constraintTop_toTopOf="@id/Space" />
+
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:elevation="4dp"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@+id/SearchFieldEditText"
+            app:layout_constraintEnd_toEndOf="@+id/SearchFieldEditText"
+            app:layout_constraintTop_toTopOf="@+id/SearchFieldEditText" />
 
         <TextView
             android:id="@+id/PostedEntriesTextView"
@@ -134,10 +152,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:paddingStart="@dimen/margin48dp"
+            android:paddingEnd="@dimen/margin48dp"
+            android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@id/AllEntriesTextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
-    
+
 </android.support.v4.widget.NestedScrollView>

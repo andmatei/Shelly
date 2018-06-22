@@ -6,34 +6,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:maxHeight="450dp">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/UserPictureImageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:elevation="5dp"
+        android:src="@drawable/ic_shellylogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/GuidelineMiddlePicture"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="@id/UserPictureImageView"
+        app:layout_constraintTop_toTopOf="@+id/UserPictureImageView"
+        app:layout_constraintBottom_toBottomOf="@id/UserPictureImageView"
+        />
+
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:paddingEnd="40dp"
-        android:paddingStart="40dp"
         android:background="@drawable/bg_cardview_account_type"
         android:elevation="4dp"
+        android:paddingBottom="24dp"
+        android:paddingEnd="40dp"
+        android:paddingStart="40dp"
+        android:paddingTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/GuidelineMiddlePicture"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/PostUsernameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="T'Challa"
             android:fontFamily="@font/segoe_semibold"
-            android:textSize="32sp"
+            android:text="T'Challa"
             android:textColor="@color/textColor"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Space
             android:id="@+id/Space"
@@ -48,18 +71,99 @@
             android:id="@+id/PostedTimeTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor50"
-            android:text="4 hours ago"
             android:fontFamily="@font/segoe_ui"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="4 hours ago"
+            android:textColor="@color/textColor50"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Space"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Space" />
+
 
         <TextView
+            android:id="@+id/PostedEntriesTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/segoe_ui_semilight_610"
+            android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel "
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PostedTimeTextView" />
+
+        <TextView
+            android:id="@+id/HashTagPostedEntry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/segoe_ui"
+            android:text="#prayforwakanda  #wakandaforever"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PostedEntriesTextView" />
+
+        <ImageView
+            android:id="@+id/LineImageView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/textColor50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/HashTagPostedEntry" />
+
+        <ImageView
+            android:id="@+id/LikeIconPostedEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_like"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LineImageView" />
+
+        <TextView
+            android:id="@+id/LikeNumberPostedEntry"
+            android:layout_width="29dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/segoe_ui"
+            android:text="203"
+            android:textColor="@color/textColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/LikeIconPostedEntry"
+            app:layout_constraintStart_toEndOf="@+id/LikeIconPostedEntry"
+            app:layout_constraintTop_toTopOf="@+id/LikeIconPostedEntry" />
+
+        <ImageView
+            android:id="@+id/CommentIconPostedEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:src="@drawable/ic_comment"
+            app:layout_constraintBottom_toBottomOf="@+id/LikeIconPostedEntry"
+            app:layout_constraintStart_toEndOf="@+id/LikeNumberPostedEntry"
+            app:layout_constraintTop_toTopOf="@+id/LikeIconPostedEntry" />
+
+        <TextView
+            android:id="@+id/CommentNumberPostedEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/segoe_ui"
+            android:text="72"
+            android:textColor="@color/textColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/CommentIconPostedEntry"
+            app:layout_constraintStart_toEndOf="@+id/CommentIconPostedEntry"
+            app:layout_constraintTop_toTopOf="@+id/CommentIconPostedEntry" />
 
     </android.support.constraint.ConstraintLayout>
 

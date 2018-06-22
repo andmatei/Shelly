@@ -8,9 +8,13 @@ public class CurrentActivity {
     private String Factor;
     private int Progress;
     private boolean Locked;
-    private boolean[] TaskStatusList;
+    private List<Boolean> TaskStatusList;
 
-    public CurrentActivity(int number, String factor, int progress, boolean locked, boolean[] taskStatusList) {
+    public CurrentActivity() {
+
+    }
+
+    public CurrentActivity(int number, String factor, int progress, boolean locked, List<Boolean> taskStatusList) {
         Number = number;
         Factor = factor;
         Progress = progress;
@@ -50,11 +54,11 @@ public class CurrentActivity {
         Locked = locked;
     }
 
-    public boolean[] getTaskStatusList() {
+    public List<Boolean> getTaskStatusList() {
         return TaskStatusList;
     }
 
-    public void setTaskStatusList(boolean[] taskStatusList) {
+    public void setTaskStatusList(List<Boolean> taskStatusList) {
         TaskStatusList = taskStatusList;
     }
 
@@ -65,7 +69,7 @@ public class CurrentActivity {
                 ", Factor='" + Factor + '\'' +
                 ", Progress=" + Progress +
                 ", Locked=" + Locked +
-                ", TaskStatusList=" + Arrays.toString(TaskStatusList) +
+                ", TaskStatusList=" + TaskStatusList +
                 '}';
     }
 }

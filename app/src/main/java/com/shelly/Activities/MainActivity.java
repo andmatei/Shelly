@@ -12,6 +12,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -33,12 +34,16 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.shelly.Models.CurrentActivity;
 import com.shelly.R;
 import com.shelly.Utils.ActivityListAdapter;
 import com.shelly.Utils.BlurMethods;
+import com.shelly.Utils.FirebaseMethods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,70 +61,73 @@ public class MainActivity extends AppCompatActivity {
     private TextView mWelcomingTextTV;
     private RecyclerView mActivitiesRV;
     private RecyclerView mPostsRV;
+    private ActivityListAdapter mActivityListAdapter;
 
     //Firebase
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRefDatabase;
     private FirebaseUser mUser;
+    private FirebaseMethods mFirebaseMethods;
 
     //Variables
     private BlurMethods mBlurMethods;
-    private List<CurrentActivity> mTest;
+    private List<CurrentActivity> mActivityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initTest();
-
         //View Binding
         mUserPhoto = findViewById(R.id.CircleImageView);
         mGreetingsTV = findViewById(R.id.GreetingTextView);
         mUsernameTV = findViewById(R.id.UsernameTextView);
         mWelcomingTextTV = findViewById(R.id.WelcomingTextTextView);
-        mActivitiesRV = findViewById(R.id.ActivitiesRecyclerView);
         mPostsRV = findViewById(R.id.RecommandedPostsRecyclerView);
-        ActivityListAdapter mActivityListAdapter = new ActivityListAdapter(mTest, this);
-        mActivitiesRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mActivitiesRV.setAdapter(mActivityListAdapter);
 
         //Firebase Binding
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance();
         mRefDatabase = mDatabase.getReference();
+        mFirebaseMethods = new FirebaseMethods(this);
 
         //Variable Binding
         mBlurMethods = new BlurMethods();
 
-        //Implementing Functionalities
-        /*if(mUser == null) {
+        if(mUser == null) {
             Intent i = new Intent(this, WelcomeActivity.class);
             startActivity(i);
-        }*/
-
-        //ViewTreeObserver vto = Test.getViewTreeObserver();
-        /*vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                Test.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                int width  = Test.getMeasuredWidth();
-                int height = Test.getMeasuredHeight();
-                ImageView BlurImgView = Test.findViewById(R.id.BluredImageView);
-                View viewContainer = Test.findViewById(R.id.ActivityCardViewRoot);
-                Bitmap mBlurBitmap = BlurMethods.createBlurBitmap(viewContainer, MainActivity.this);
-                BlurMethods.setBackgroundOnView(BlurImgView, mBlurBitmap, MainActivity.this, 8);
-            }
-        });*/
-    }
-    public void initTest() {
-        CurrentActivity currentActivity;
-        mTest = new ArrayList<>();
-        for(int i = 0 ; i < 7; i++) {
-            currentActivity = new CurrentActivity(1, "Depression", 30, true, null);
-            mTest.add(currentActivity);
+            finish();
+        } else {
+            mFirebaseMethods.checkAccountSettingsCompletion();
+            //Implementing Functionalities
+            Log.e("UserID", mUser.getUid());
+            initializeData();
         }
+    }
+
+    public void initializeData() {
+        mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mActivityList = new ArrayList<>();
+                for(DataSnapshot ds: dataSnapshot.child(getString(R.string.dbfield_members)).child(mUser.getUid()).child(getString(R.string.dbfield_members_activities)).getChildren()) {
+                    Log.e("Ds", ds.toString());
+                    CurrentActivity currentActivity = ds.getValue(CurrentActivity.class);
+                    mActivityList.add(currentActivity);
+                }
+                mActivitiesRV = findViewById(R.id.ActivitiesRecyclerView);
+                mActivityListAdapter = new ActivityListAdapter(mActivityList, MainActivity.this);
+                mActivitiesRV.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                mActivitiesRV.setAdapter(mActivityListAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
