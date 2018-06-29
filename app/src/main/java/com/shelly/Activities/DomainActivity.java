@@ -26,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.shelly.R;
 import com.shelly.Utils.DomainListAdapter;
@@ -38,7 +39,6 @@ import java.util.List;
 public class DomainActivity extends AppCompatActivity {
 
     //Views
-    private TextView mDomainTitleTV;
     private Button mFinishSetUpBtn;
     private RecyclerView mDomainListRV;
     private DomainListAdapter mDomainListAdapter;
@@ -66,7 +66,6 @@ public class DomainActivity extends AppCompatActivity {
         initializeData();
 
         //View Binding
-        mDomainTitleTV = findViewById(R.id.DomainTitleTextView);
         mFinishSetUpBtn = findViewById(R.id.FinishSetUpButton);
 
         //Implementing Functionalities
@@ -84,10 +83,10 @@ public class DomainActivity extends AppCompatActivity {
     }
 
     public void initializeData() {
-        mRefDatabase.child(getString(R.string.dbfield_resources)).
-                        child(getString(R.string.dbfiled_domains_resources)).
-                            child(getString(R.string.dbfield_domain_list)).
-                                addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = mRefDatabase.child(getString(R.string.dbfield_resources)).
+                child(getString(R.string.dbfiled_domains_resources)).
+                child(getString(R.string.dbfield_domain_list));
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {

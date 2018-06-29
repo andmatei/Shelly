@@ -17,18 +17,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.shelly.Models.CurrentActivity;
-import com.shelly.Models.User;
-import com.shelly.Models.UserMember;
 import com.shelly.R;
 import com.shelly.Utils.FirebaseMethods;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -113,7 +109,7 @@ public class TestActivity extends AppCompatActivity {
                     mNumQuestion++;
                     QuestionItem questionItem = mQuestionList.get(mNumQuestion);
                     mQuestionTV.setText(questionItem.Question);
-                    if(questionItem.Elements.size() > 0) {
+                    if(questionItem.Elements != null && questionItem.Elements.size() > 0) {
                         mQuestionElementTV.setText(questionItem.Elements.get(mNumElement).element);
                     } else {
                         mQuestionElementTV.setText("");
@@ -145,10 +141,11 @@ public class TestActivity extends AppCompatActivity {
     public void initializeData() {
 
         //Initializing the TestResults HashMap
-        mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = mRefDatabase.child(getString(R.string.dbfield_resources)).child(getString(R.string.dbfield_test_resources)).child(getString(R.string.dbfield_test_factors));
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.child(getString(R.string.dbfield_resources)).child(getString(R.string.dbfield_test_resources)).child(getString(R.string.dbfield_test_factors)).getChildren()) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     mTestResults.put((String) ds.getValue(), 0);
                     Log.e("TestInitialization", (String) ds.getValue() + " initialized");
                 }
@@ -168,10 +165,11 @@ public class TestActivity extends AppCompatActivity {
         }
 
         //Initializing the Question Array
-        mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        query = mRefDatabase.child(getString(R.string.dbfield_resources)).child(getString(R.string.dbfield_test_resources)).child(getString(R.string.dbfield_test_questions));
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds:dataSnapshot.child(getString(R.string.dbfield_resources)).child(getString(R.string.dbfield_test_resources)).child(getString(R.string.dbfield_test_questions)).getChildren()) {
+                for(DataSnapshot ds:dataSnapshot.getChildren()) {
                     Log.e("Snapshot", ""+ds);
                     QuestionItem  questionItem = ds.getValue(QuestionItem.class);
                     mQuestionList.add(questionItem);

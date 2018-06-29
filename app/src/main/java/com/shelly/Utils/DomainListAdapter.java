@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +34,7 @@ public class DomainListAdapter extends RecyclerView.Adapter<DomainListAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.domain_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_domain_item, parent, false);
         return new ViewHolder(v);
     }
 

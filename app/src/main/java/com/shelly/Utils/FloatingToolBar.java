@@ -2,7 +2,6 @@ package com.shelly.Utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import android.widget.LinearLayout;
 
 import com.shelly.R;
 
-public class Tool_bar extends ConstraintLayout {
+public class FloatingToolBar extends ConstraintLayout {
 
     private Context context;
     private Activity activity;
@@ -26,7 +25,7 @@ public class Tool_bar extends ConstraintLayout {
 
     boolean MenuIsExtended;
 
-    public Tool_bar(Context mContext, AttributeSet attrs) {
+    public FloatingToolBar(Context mContext, AttributeSet attrs) {
         super(mContext, attrs);
         context = mContext;
         activity = (Activity) context;
@@ -59,7 +58,7 @@ public class Tool_bar extends ConstraintLayout {
                     MenuIB.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_menu));
                     ExtendedMenuLL.setVisibility(View.GONE);
                 } else {
-                    MenuIB.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_x));
+                    MenuIB.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_close_menu));
                     ExtendedMenuLL.setVisibility(View.VISIBLE);
                 }
                 MenuIsExtended = !MenuIsExtended;

@@ -6,66 +6,265 @@
     android:layout_height="match_parent"
     tools:context=".Activities.EditModeActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/EditModeToolbar"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:background="@drawable/bg_edit_mode"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_back_edit_mode"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.023"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/ExitEditModeImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_back_primary_color"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/bg_round_white"
+            android:elevation="5dp"/>
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_settings_edit_mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/TextFormatImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_text_format"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_round_white"
+            android:elevation="5dp"/>
 
-    <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_add_edit_mode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/EditModeSettingsImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_settings_edit_mode"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/TextFormatImageButton"
+            android:background="@drawable/bg_round_white"
+            android:elevation="5dp"/>
 
-    <LinearLayout
+        <ImageButton
+            android:id="@+id/EditModeAddImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_add_primary_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@id/EditModeSettingsImageButton"
+            android:background="@drawable/bg_round_white"
+            android:elevation="5dp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/EditModeScrollView"
         android:layout_width="match_parent"
-        android:layout_height="630dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:paddingTop="40dp"
+        android:background="@drawable/bg_edit_mode_activity"
+        android:elevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/EditModeToolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <include layout="@layout/cardview_edit_text" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/EditModeContentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="24dp"
+                android:text="@string/lorem_ipsum_large"
+                android:hint="@string/editmode_hint"
+                android:fontFamily="@font/segoe_ui"
+                android:textSize="16sp"
+                android:textColor="@color/textColor"
+                android:lineSpacingMultiplier="1.1"
+                android:background="@android:color/transparent"
+                android:inputType="textMultiLine"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+    </ScrollView>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/TextFormatMenu"
+        android:elevation="5dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/CloseTextFormatImageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_close_dialog"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/TextTypeRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CloseTextFormatImageButton"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/TextStyleRecyclerView"
+            tools:ignore="UnknownId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextTypeRecyclerView"/>
+
+        <!--<LinearLayout
+            android:id="@+id/TextTypeHorizontalView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CloseTextFormatImageButton"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+                <ToggleButton
+                    android:id="@+id/TitleEditMode"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_toggle"
+                    android:textOff="Title"
+                    android:textOn="Title"
+                    android:textSize="20sp"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/segoe_semibold"
+                    android:textColor="@color/textColor50"/>
+
+                <ToggleButton
+                    android:id="@+id/HeadingEditMode"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_toggle"
+                    android:textOff="Heading"
+                    android:textOn="Heading"
+                    android:textSize="20sp"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/segoe_ui"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColor50"/>
+
+                <ToggleButton
+                    android:id="@+id/BodyEditMode"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_toggle"
+                    android:textOff="Body"
+                    android:textOn="Body"
+                    android:textSize="20sp"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/segoe_ui"
+                    android:textColor="@color/textColor50"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextTypeHorizontalView">
+
+
+                <ToggleButton
+                    android:id="@+id/BoldEditMode"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/btn_toggle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textOn="B"
+                    android:textOff="B"
+                    android:fontFamily="@font/segoe_ui"
+                    android:textStyle="bold"
+                    android:textColor="@color/textColor"
+                    android:textSize="20sp"/>
+
+                <ToggleButton
+                    android:id="@+id/ItalicEditMode"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/btn_toggle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textOn="I"
+                    android:textOff="I"
+                    android:fontFamily="@font/segoe_ui"
+                    android:textStyle="italic"
+                    android:textColor="@color/textColor"
+                    android:textSize="20sp"/>
+
+                <ToggleButton
+                    android:id="@+id/UnderlineEditMode"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/btn_toggle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textOn="U"
+                    android:textOff="U"
+                    android:fontFamily="@font/segoe_ui"
+                    android:textStyle=""
+                    android:textColor="@color/textColor"
+                    android:textSize="20sp"/>
+
+        </LinearLayout>-->
+
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>

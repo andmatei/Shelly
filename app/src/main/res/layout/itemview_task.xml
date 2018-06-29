@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_underline_bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/TaskCheckedImageButton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:padding="2dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_task_checkbox"
+        android:src="@drawable/ic_unselected_domain"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ExpandDescriptionButton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:padding="6dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_arrow_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/TaskCheckedImageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/TaskCheckedImageButton" />
+
+
+    <TextView
+        android:id="@+id/TaskTitleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Lorem ipsum"
+        android:textSize="20sp"
+        android:fontFamily="@font/segoe_ui"
+        android:textStyle="bold"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="@+id/TaskCheckedImageButton"
+        app:layout_constraintEnd_toStartOf="@id/ExpandDescriptionButton"
+        app:layout_constraintStart_toEndOf="@id/TaskCheckedImageButton"
+        app:layout_constraintTop_toTopOf="@+id/TaskCheckedImageButton" />
+
+    <TextView
+        android:id="@+id/TaskDescriptionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/lorem_ipsum_large"
+        android:fontFamily="@font/segoeuil"
+        android:textColor="@color/textColor"
+        android:textSize="14sp"
+        android:lineSpacingMultiplier="1.1"
+        app:layout_constraintStart_toStartOf="@id/TaskTitleTextView"
+        app:layout_constraintEnd_toEndOf="@id/ExpandDescriptionButton"
+        app:layout_constraintTop_toBottomOf="@id/TaskTitleTextView"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

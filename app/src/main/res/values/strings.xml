@@ -15,8 +15,13 @@
 
     <string name="choose_your_domains">Choose your <i>domains</i></string>
 
+    <string name="editmode_hint">Start writing your thougths for today&#8230; </string>
+
+    <string name="congratulations">Congratulations!</string>
+    <string name="congratulations_description">You have just completed an activity. See you tomorrow for more. Until then, here\'s your prize!</string>
+
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut </string>
-    <string name="ambassador_text">Nice to meet you, Ambassador.</string>
+    <string name="lorem_ipsum_large">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commo.</string>
 
     <!--Firebase fields-->
     <string name="dbfield_users">Users</string>
@@ -33,10 +38,12 @@
     <string name="dbfield_domain_list">Domains</string>
 
     <string name="dbfield_activities">Activities</string>
+    <string name="dbfield_activitiy_tasks">tasks</string>
 
     <string name="dbfield_members">Members</string>
-    <string name="dbfield_members_testresults">TestResults</string>
-    <string name="dbfield_members_activities">Activities</string>
+    <string name="dbfield_members_testresults">testResults</string>
+    <string name="dbfield_members_activities">activities</string>
+    <string name="dbfield_members_points">points</string>
 
     <string name="dbfield_ambassadors">Ambassadors</string>
 

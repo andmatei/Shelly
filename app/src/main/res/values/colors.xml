@@ -12,7 +12,7 @@
 
     <color name="textColor">#3B3947</color>
     <color name="textColor50">#503B3947</color>
-    <color name="textColor75">#753B3947</color>
+    <color name="textColor75">#AA3B3947</color>
 
     <!---Activity colors-->
     <color name="AngerStartColor">#F08488</color>

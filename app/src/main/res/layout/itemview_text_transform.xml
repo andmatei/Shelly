@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ToggleButton
+        android:id="@+id/ToggleTextTransformation"
+        style="?android:attr/buttonBarButtonStyle"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:minWidth="110dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_toggle"
+        android:textOff="Body"
+        android:textOn="Body"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:fontFamily="@font/segoe_ui"
+        android:textColor="@color/textColor50"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -44,7 +44,6 @@ public class BlurMethods {
                 View.MeasureSpec.makeMeasureSpec(190, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(190, View.MeasureSpec.EXACTLY));
         view.layout(0, 0, 190, 190);
-        Log.e("Width", ""+view.getMeasuredWidth());
         Bitmap image = Bitmap.createBitmap(view.getMeasuredHeight(),
                 view.getMeasuredHeight(),
                 Bitmap.Config.ARGB_4444);
@@ -55,7 +54,6 @@ public class BlurMethods {
         ColorFilter filter = new LightingColorFilter(0xFFCECECE, 0x000B0B0B);
         paint.setColorFilter(filter);
         canvas.drawBitmap(image, 0, 0, paint);
-        Log.e("Image", "" + image);
         return image;
     }
 
@@ -81,7 +79,6 @@ public class BlurMethods {
         } else {
             d = ContextCompat.getDrawable(mContext, R.drawable.bg_cardview_account_type);
         }
-        Log.e("Drawable", "" + d);
         view.setBackground(d);
     }
 }
