@@ -13,8 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.WelcomeActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.LogInActivity"
             android:screenOrientation="portrait" />
@@ -26,7 +25,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.MainActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,12 +40,14 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.TestActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Activities.EntryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.EditModeActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Activities.EntryActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".Activities.EditModeActivity"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

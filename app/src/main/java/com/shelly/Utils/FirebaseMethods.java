@@ -17,20 +17,25 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.shelly.Activities.AccountTypeActivity;
-import com.shelly.Activities.DomainActivity;
 import com.shelly.Activities.FinalSetUpActivity;
-import com.shelly.Activities.TestActivity;
-import com.shelly.Models.CurrentActivity;
+import com.shelly.Models.ActivityResource;
+import com.shelly.Models.ActivityStatus;
 import com.shelly.Models.User;
+import com.shelly.Models.UserMember;
 import com.shelly.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class FirebaseMethods {
 
@@ -131,31 +136,33 @@ public class FirebaseMethods {
 
     public void initializeActivities(final HashMap<String, Integer> mTestResults) {
 
-        mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        //TODO 1: Implement the method to advance the user to the next level when retaking the test
+
+        Query query = mRefDatabase.child(mContext.getString(R.string.dbfield_resources)).child(mContext.getString(R.string.dbfield_activities));
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                DataSnapshot DS = dataSnapshot.child(mContext.getString(R.string.dbfield_resources)).child(mContext.getString(R.string.dbfield_activities));
-                List<CurrentActivity> mActivityList = new ArrayList<>();
+                HashMap<String, ActivityStatus> mActivityList = new HashMap<>();
                 for(String key : mTestResults.keySet()) {
                     if(!key.toLowerCase().equals("vigour")) {
                         int score = mTestResults.get(key);
                         List<Boolean> mTaskStatusList = new ArrayList<>();
-                        for(int i = 0 ; i < DS.child(key).child("0").getChildrenCount(); i++) {
+                        for(int i = 0 ; i < dataSnapshot.child(key).child("0").child("0").child(mContext.getString(R.string.dbfield_activitiy_tasks)).getChildrenCount(); i++) {
                             mTaskStatusList.add(false);
                         }
                         score -= (mTestResults.get("vigour")/(mTestResults.size()-1));
                         mTestResults.put(key, score);
                         if(score >= 10) {
-                            CurrentActivity currentActivity = new CurrentActivity(1,key, 0, false, mTaskStatusList);
-                            mActivityList.add(currentActivity);
+                            ActivityStatus activityStatus = new ActivityStatus(key, 0, 0, 0, false, mTaskStatusList, null);
+                            mActivityList.put(key, activityStatus);
                         } else {
-                            CurrentActivity currentActivity = new CurrentActivity(1, key, 0, true, mTaskStatusList);
-                            mActivityList.add(currentActivity);
+                            ActivityStatus activityStatus = new ActivityStatus(key, 0, 0, 0, true, mTaskStatusList, null);
+                            mActivityList.put(key, activityStatus);
                         }
                     }
                 }
-                mRefDatabase.child(mContext.getString(R.string.dbfield_members)).child(UserID).child(mContext.getString(R.string.dbfield_members_testresults)).setValue(mTestResults);
-                mRefDatabase.child(mContext.getString(R.string.dbfield_members)).child(UserID).child(mContext.getString(R.string.dbfield_members_activities)).setValue(mActivityList);
+                UserMember userMember = new UserMember(0, mTestResults, mActivityList);
+                mRefDatabase.child(mContext.getString(R.string.dbfield_members)).child(UserID).setValue(userMember);
             }
 
             @Override
@@ -163,6 +170,121 @@ public class FirebaseMethods {
 
             }
         });
+    }
+
+    public void addPoints(final int Points) {
+        Query query = mRefDatabase
+                .child(mContext.getString(R.string.dbfield_members)).
+                        child(UserID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int mPoints = dataSnapshot.getValue(UserMember.class).getPoints();
+                mPoints += Points;
+                mRefDatabase
+                        .child(mContext.getString(R.string.dbfield_members)).
+                        child(UserID).child(mContext.getString(R.string.dbfield_members_points)).setValue(mPoints);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void updateActivityStatus(ActivityStatus activityStatus) {
+        if(activityStatus.getProgress() == 100) {
+            Log.e("Date", getTimestamp(1));
+            activityStatus.setChangeDate(getTimestamp(1));
+            activityStatus.setLocked(true);
+        } else {
+            activityStatus.setChangeDate(null);
+        }
+        mRefDatabase.
+                child(mContext.getString(R.string.dbfield_members)).
+                child(UserID).
+                child(mContext.getString(R.string.dbfield_members_activities)).
+                child(activityStatus.getFactor()).setValue(activityStatus);
+    }
+
+    private boolean checkActivityStatus(ActivityStatus activityStatus) {
+        if (activityStatus.getChangeDate()!=null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
+            String Date = getTimestamp(0);
+            try {
+                if(sdf.parse(activityStatus.getChangeDate()).compareTo(sdf.parse(Date)) < 0) {
+                    return true;
+                }
+            } catch (ParseException e) {
+                Log.e("Exception:", "" + e);
+            }
+        }
+        return false;
+    }
+
+    public void advanceActivityStatus(ActivityStatus activityStatus, DataSnapshot dataSnapshot) {
+        if(checkActivityStatus(activityStatus)) {
+            if(dataSnapshot.child(mContext.getString(R.string.dbfield_resources)).
+                    child(mContext.getString(R.string.dbfield_activities)).
+                    child(activityStatus.getFactor()).
+                    child(""+activityStatus.getLevel()).getChildrenCount() > activityStatus.getNumber() + 1) {
+
+                /*if(dataSnapshot.child(mContext.getString(R.string.dbfield_resources)).
+                        child(mContext.getString(R.string.dbfield_activities)).
+                        child(activityStatus.getFactor()).getChildrenCount() > activityStatus.getLevel() + 1) {
+
+                    activityStatus.setProgress(0);
+                    activityStatus.setChangeDate(null);
+                    activityStatus.setLocked(false);
+                    activityStatus.setNumber(0);
+                    activityStatus.setLevel(activityStatus.getLevel() + 1);
+                    List<Boolean> mTaskStatusList = new ArrayList<>();
+                    for(int i = 0 ; i < dataSnapshot.child(mContext.getString(R.string.dbfield_resources)).
+                            child(mContext.getString(R.string.dbfield_activities)).
+                            child(activityStatus.getFactor()).
+                            child(""+activityStatus.getLevel()).
+                            child(""+activityStatus.getNumber()).getChildrenCount(); i++) {
+                            mTaskStatusList.add(false);
+                    }
+                    activityStatus.setTaskStatusList(mTaskStatusList);
+                }*/
+                activityStatus.setProgress(0);
+                activityStatus.setChangeDate(null);
+                activityStatus.setLocked(false);
+                activityStatus.setNumber(activityStatus.getNumber() + 1);
+                List<Boolean> mTaskStatusList = new ArrayList<>();
+                for(int i = 0 ; i < dataSnapshot.child(mContext.getString(R.string.dbfield_resources)).
+                        child(mContext.getString(R.string.dbfield_activities)).
+                        child(activityStatus.getFactor()).
+                        child(""+activityStatus.getLevel()).
+                        child(""+activityStatus.getNumber()).getChildrenCount(); i++) {
+                    mTaskStatusList.add(false);
+                }
+                activityStatus.setTaskStatusList(mTaskStatusList);
+            }
+
+            mRefDatabase.child(mContext.getString(R.string.dbfield_members)).
+                    child(UserID).
+                    child(mContext.getString(R.string.dbfield_members_activities)).
+                    child(activityStatus.getFactor()).setValue(activityStatus);
+        }
+    }
+
+    private String getTimestamp(int mode) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
+        sdf.setTimeZone(TimeZone.getTimeZone("Romania"));
+        String Date = sdf.format(new Date());
+        if(mode == 1) {
+            Calendar c = Calendar.getInstance();
+            try {
+                c.setTime(sdf.parse(Date));
+            } catch (ParseException e) {
+                Log.e("Exception:", "" + e);
+            }
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            return sdf.format(c.getTime());
+        }
+        return Date;
     }
 
 }

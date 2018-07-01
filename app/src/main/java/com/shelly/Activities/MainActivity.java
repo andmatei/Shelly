@@ -1,35 +1,21 @@
 package com.shelly.Activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.LightingColorFilter;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v8.renderscript.Allocation;
-import android.support.v8.renderscript.Element;
-import android.support.v8.renderscript.RenderScript;
-import android.support.v8.renderscript.ScriptIntrinsicBlur;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,8 +24,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.shelly.Models.CurrentActivity;
+import com.shelly.Models.ActivityStatus;
 import com.shelly.R;
 import com.shelly.Utils.ActivityListAdapter;
 import com.shelly.Utils.BlurMethods;
@@ -47,14 +34,17 @@ import com.shelly.Utils.FirebaseMethods;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.widget.NumberPicker.OnScrollListener.SCROLL_STATE_IDLE;
 
 public class MainActivity extends AppCompatActivity {
 
 
     //Views
+    private ImageView mBackground;
+    private ImageView mSecondBackground;
     private CircleImageView mUserPhoto;
     private TextView mGreetingsTV;
     private TextView mUsernameTV;
@@ -72,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Variables
     private BlurMethods mBlurMethods;
-    private List<CurrentActivity> mActivityList;
+    private List<ActivityStatus> mActivityList;
+    private int mPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +71,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //View Binding
+        mBackground = findViewById(R.id.MainActivityBackground);
+        mSecondBackground = findViewById(R.id.MainActivityBackground2);
         mUserPhoto = findViewById(R.id.CircleImageView);
         mGreetingsTV = findViewById(R.id.GreetingTextView);
         mUsernameTV = findViewById(R.id.UsernameTextView);
         mWelcomingTextTV = findViewById(R.id.WelcomingTextTextView);
         mPostsRV = findViewById(R.id.RecommandedPostsRecyclerView);
+        mActivitiesRV = findViewById(R.id.ActivitiesRecyclerView);
 
         //Firebase Binding
         mAuth = FirebaseAuth.getInstance();
@@ -101,32 +95,88 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         } else {
+            Log.e("ID", mUser.getUid());
             mFirebaseMethods.checkAccountSettingsCompletion();
+
             //Implementing Functionalities
-            Log.e("UserID", mUser.getUid());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Window w = getWindow(); // in Activity's onCreate() for instance
+                w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            }
+
             initializeData();
         }
     }
 
-    public void initializeData() {
-        mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void initializeData() {
+        Query query = mRefDatabase.child(getString(R.string.dbfield_members)).child(mUser.getUid()).child(getString(R.string.dbfield_members_activities));
+        mRefDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mActivityList = new ArrayList<>();
-                for(DataSnapshot ds: dataSnapshot.child(getString(R.string.dbfield_members)).child(mUser.getUid()).child(getString(R.string.dbfield_members_activities)).getChildren()) {
-                    Log.e("Ds", ds.toString());
-                    CurrentActivity currentActivity = ds.getValue(CurrentActivity.class);
-                    mActivityList.add(currentActivity);
+                for(DataSnapshot ds : dataSnapshot.
+                        child(getString(R.string.dbfield_members)).
+                        child(mUser.getUid()).
+                        child(getString(R.string.dbfield_members_activities)).getChildren()) {
+                    ActivityStatus activityStatus = ds.getValue(ActivityStatus.class);
+                    if(activityStatus !=null) {
+                        mFirebaseMethods.advanceActivityStatus(activityStatus, dataSnapshot);
+                        if(activityStatus.isLocked()) {
+                            mActivityList.add(activityStatus);
+                        } else {
+                            mActivityList.add(0, activityStatus);
+                        }
+                    }
                 }
-                mActivitiesRV = findViewById(R.id.ActivitiesRecyclerView);
-                mActivityListAdapter = new ActivityListAdapter(mActivityList, MainActivity.this);
-                mActivitiesRV.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                mActivitiesRV.setAdapter(mActivityListAdapter);
+                initializeWidgets();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+    }
+
+    private void initializeWidgets() {
+        mActivityListAdapter = new ActivityListAdapter(mActivityList, MainActivity.this);
+        mActivitiesRV.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+        mActivitiesRV.setAdapter(mActivityListAdapter);
+        mActivitiesRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == SCROLL_STATE_IDLE) {
+                    LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                    int pos = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
+                    if(pos != mPosition && pos != -1) {
+                        mPosition = pos;
+                        LayerDrawable layerDrawable = (LayerDrawable) getResources().getDrawable(R.drawable.bg_main_activity);
+                        final Drawable drawable = layerDrawable.findDrawableByLayerId(getResources().getIdentifier("Background" + (mPosition % 5), "id", "com.shelly"));
+
+                        Animation fadeOut = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_out);
+                        mSecondBackground.setBackground(mBackground.getBackground());
+                        mSecondBackground.setVisibility(View.VISIBLE);
+                        mSecondBackground.startAnimation(fadeOut);
+
+                        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+                                mBackground.setBackground(drawable);
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                mSecondBackground.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+
+                            }
+                        });
+                    }
+                }
             }
         });
     }

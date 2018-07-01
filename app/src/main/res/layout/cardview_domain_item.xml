@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="68dp"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="40dp"
+    android:layout_marginEnd="32dp"
+    android:layout_marginStart="40dp"
+    android:layout_marginRight="32dp"
+    android:id="@+id/DomainWrapperConstraintLayout">
+
+    <ImageView
+        android:id="@+id/DomainWrapperImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_white_input_field"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/CheckBoxImageView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_domain_checkbox"
+        android:elevation="4dp"
+        android:src="@drawable/ic_unselected_domain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/DomainWrapperImageView"
+        app:layout_constraintStart_toStartOf="@+id/DomainWrapperImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/DomainTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="24dp"
+        android:elevation="5dp"
+        android:text="Lorem ipsum"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/segoe_ui"
+        app:layout_constraintBottom_toBottomOf="@+id/CheckBoxImageView"
+        app:layout_constraintEnd_toEndOf="@+id/DomainWrapperImageView"
+        app:layout_constraintStart_toEndOf="@+id/CheckBoxImageView"
+        app:layout_constraintTop_toTopOf="@+id/CheckBoxImageView" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:maxHeight="1120dp"
+    android:maxWidth="672dp">
+
+    <ImageView
+        android:id="@+id/ActivityDialogIconImageView"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_cardview_activity"
+        android:elevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/GuidelineIcon"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ActivityDialogIconImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_cardview_rounded"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GuidelineIcon">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/DialogActivityManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/ExitDialogImageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_close_dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ActivityLevelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="32dp"
+                android:text="Level 1"
+                android:textSize="12sp"
+                android:fontFamily="@font/segoe_ui_semilight_610"
+                android:textColor="@color/textColor50"
+                app:layout_constraintTop_toBottomOf="@+id/ExitDialogImageButton"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/ActivityDialogTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:fontFamily="@font/segoe_ui"
+                android:text="Activity 1"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ActivityLevelTextView" />
+
+            <ImageButton
+                android:id="@+id/PreviousActivityButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="4dp"
+                android:padding="6dp"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_arrow_horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/ActivityDialogTitleTextView"
+                app:layout_constraintEnd_toStartOf="@+id/ActivityDialogTitleTextView"
+                app:layout_constraintTop_toTopOf="@+id/ActivityDialogTitleTextView" />
+
+            <ImageButton
+                android:id="@+id/NextActivityButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/transparent"
+                android:padding="6dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_arrow_horizontal"
+                android:layoutDirection="rtl"
+                app:layout_constraintBottom_toBottomOf="@+id/ActivityDialogTitleTextView"
+                app:layout_constraintLeft_toRightOf="@+id/ActivityDialogTitleTextView"
+                app:layout_constraintTop_toTopOf="@+id/ActivityDialogTitleTextView" />
+
+            <TextView
+                android:id="@+id/ActivityDialogProgressTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:fontFamily="@font/segoe_ui_semilight_610"
+                android:text="Progress: 33%"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/ActivityDialogTitleTextView"
+                app:layout_constraintStart_toStartOf="@+id/ActivityDialogTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/ActivityDialogTitleTextView" />
+
+            <ProgressBar
+                android:id="@+id/ActivityDialogProgressBar"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:max="100"
+                android:progressBackgroundTint="@color/colorPrimaryDark"
+                android:progressTint="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="@id/ActivityDialogProgressTextView"
+                app:layout_constraintStart_toStartOf="@id/ActivityDialogProgressTextView"
+                app:layout_constraintTop_toBottomOf="@+id/ActivityDialogProgressTextView" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ActivityDialogTasksRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:clipToPadding="false"
+                app:layout_constraintBottom_toTopOf="@id/ActivityDialogPointsTextView"
+                app:layout_constraintTop_toBottomOf="@id/ActivityDialogProgressBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/ActivityDialogPointsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:fontFamily="@font/segoe_ui_semilight_610"
+                android:text="130"
+                android:textColor="@color/textColor50"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ActivityDialogTitleTextView" />
+
+            <Space
+                android:id="@+id/Space"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintStart_toStartOf="@id/ActivityDialogPointsTextView"
+                app:layout_constraintEnd_toEndOf="@id/ActivityDialogPointsTextView"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityDialogPointsTextView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="points"
+                android:fontFamily="@font/segoe_ui_semilight_610"
+                android:textColor="@color/textColor50"
+                android:textSize="14sp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="@id/ActivityDialogPointsTextView"
+                app:layout_constraintEnd_toEndOf="@id/ActivityDialogPointsTextView"
+                app:layout_constraintTop_toBottomOf="@id/Space" />
+
+
+        </android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/CongratulationsDialogScreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/bg_round_primary_color"
+                android:src="@drawable/ic_selected_domain"
+                android:layout_gravity="center_horizontal"/>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/congratulations"
+                android:fontFamily="@font/segoe_semibold"
+                android:textSize="24sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/congratulations_description"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:fontFamily="@font/segoeuil"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/CongratulationsDialogPointsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="150 points"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/segoe_ui"
+                />
+
+            <Button
+                android:id="@+id/CongratulationsDialogButton"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:elevation="4dp"
+                android:text="Got it!"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:fontFamily="@font/segoe_semibold"
+                android:background="@drawable/btn_primary_color_rounded"/>
+
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
