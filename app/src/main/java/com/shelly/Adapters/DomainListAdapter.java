@@ -1,4 +1,4 @@
-package com.shelly.Utils;
+package com.shelly.Adapters;
 
 import android.content.Context;
 import android.graphics.drawable.LayerDrawable;
@@ -20,14 +20,14 @@ public class DomainListAdapter extends RecyclerView.Adapter<DomainListAdapter.Vi
 
     private List<String> mDomainsList;
     private Context mContext;
-    private HashMap<String, Integer> mSelectedDomains;
+    private HashMap<String, Boolean> mSelectedDomains;
 
     public DomainListAdapter(List<String> mDomainsList, Context mContext) {
         this.mDomainsList = mDomainsList;
         this.mContext = mContext;
         this.mSelectedDomains = new HashMap<>();
         for(int i = 0; i < mDomainsList.size(); i++) {
-            this.mSelectedDomains.put(mDomainsList.get(i), 0);
+            this.mSelectedDomains.put(mDomainsList.get(i), false);
         }
     }
 
@@ -40,7 +40,7 @@ public class DomainListAdapter extends RecyclerView.Adapter<DomainListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        final LayerDrawable mLayerDrawable = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.bg_domain_checkbox);
+        final LayerDrawable mLayerDrawable = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.bg_round_checkbox);
         holder.mDomainTextView.setText(mDomainsList.get(position));
         holder.mWrapperConstraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,11 +49,11 @@ public class DomainListAdapter extends RecyclerView.Adapter<DomainListAdapter.Vi
                 if(holder.mCheckedDomain) {
                     holder.mCheckBoxImageView.setBackground(mLayerDrawable.findDrawableByLayerId(R.id.bgDomainSelected));
                     holder.mCheckBoxImageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_selected_domain));
-                    mSelectedDomains.put(mDomainsList.get(holder.getAdapterPosition()), 1);
+                    mSelectedDomains.put(mDomainsList.get(holder.getAdapterPosition()), true);
                 } else {
                     holder.mCheckBoxImageView.setBackground(mLayerDrawable.findDrawableByLayerId(R.id.bgDomainUnselected));
                     holder.mCheckBoxImageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_unselected_domain));
-                    mSelectedDomains.put(mDomainsList.get(holder.getAdapterPosition()), 0);
+                    mSelectedDomains.put(mDomainsList.get(holder.getAdapterPosition()), false);
                 }
             }
         });
@@ -64,7 +64,7 @@ public class DomainListAdapter extends RecyclerView.Adapter<DomainListAdapter.Vi
         return mDomainsList.size();
     }
 
-    public HashMap<String, Integer> getmSelectedDomains() {
+    public HashMap<String, Boolean> getSelectedDomains() {
         return this.mSelectedDomains;
     }
 

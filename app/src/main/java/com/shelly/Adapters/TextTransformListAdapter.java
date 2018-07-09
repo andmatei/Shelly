@@ -1,7 +1,6 @@
-package com.shelly.Utils;
+package com.shelly.Adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -10,31 +9,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.EditText;
 import android.widget.ToggleButton;
 
-import com.shelly.Models.TextTransformationUtils;
+import com.shelly.Models.EntryContent;
+import com.shelly.Models.TextTransformationModel;
 import com.shelly.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TextTransformListAdapter extends RecyclerView.Adapter<TextTransformListAdapter.ViewHolder> {
 
     private static int CODE_SINGLE_CHECK = 0;
-    private static int CODE_MULTIPLE_CHECK = 1;
 
-    private List<TextTransformationUtils> mTextTransformList;
+    private List<TextTransformationModel> mTextTransformList;
     private Context mContext;
     private int mMode;
+    private EntryContent mEntryContent;
     private List<String> mTags;
 
-    public TextTransformListAdapter(List<TextTransformationUtils> mTextTransformList, Context mContext, int mMode, List<String> mTags) {
+    public TextTransformListAdapter(List<TextTransformationModel> mTextTransformList, Context mContext, int mMode, EntryContent mEntryContent) {
         this.mTextTransformList = mTextTransformList;
         this.mContext = mContext;
         this.mMode = mMode;
-        this.mTags = mTags;
+        this.mEntryContent = mEntryContent;
+        mTags = mEntryContent.getTags();
     }
 
     @NonNull
@@ -46,24 +45,26 @@ public class TextTransformListAdapter extends RecyclerView.Adapter<TextTransform
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        final TextTransformationUtils textTransformationUtils = mTextTransformList.get(position);
-        holder.mToggleButton.setTypeface(textTransformationUtils.getTextFont());
-        holder.mToggleButton.setTextOff(Html.fromHtml(textTransformationUtils.getFieldValue()));
-        holder.mToggleButton.setTextOn(Html.fromHtml(textTransformationUtils.getFieldValue()));
-        holder.mToggleButton.setChecked(textTransformationUtils.isSelected());
+        final TextTransformationModel textTransformationModel = mTextTransformList.get(position);
+        holder.mToggleButton.setTypeface(textTransformationModel.getTextFont());
+        holder.mToggleButton.setTextOff(Html.fromHtml(textTransformationModel.getFieldValue()));
+        holder.mToggleButton.setTextOn(Html.fromHtml(textTransformationModel.getFieldValue()));
+        holder.mToggleButton.setChecked(textTransformationModel.isSelected());
         holder.mToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.e("Checked", "" + isChecked);
-                if(!textTransformationUtils.isSelected()) {
+                if(!textTransformationModel.isSelected()) {
                     if (isChecked) {
                         if(mMode == CODE_SINGLE_CHECK) {
-                            oneItemSelected(textTransformationUtils);
+                            oneItemSelected(textTransformationModel);
                         } else {
-                            mTags.add(textTransformationUtils.getAssignedTag());
+                            mTags.add(textTransformationModel.getAssignedTag());
+                            addTag(textTransformationModel.getAssignedTag());
                         }
                     } else {
-                        mTags.remove(textTransformationUtils.getAssignedTag());
+                        mTags.remove(textTransformationModel.getAssignedTag());
+                        removeTag(textTransformationModel.getAssignedTag());
                     }
                 } else {
                     if(mMode == CODE_SINGLE_CHECK) {
@@ -95,21 +96,31 @@ public class TextTransformListAdapter extends RecyclerView.Adapter<TextTransform
         }
     }
 
-    private void oneItemSelected(TextTransformationUtils item) {
+    private void oneItemSelected(TextTransformationModel item) {
         for(int i = 0; i < mTextTransformList.size(); i++) {
-            TextTransformationUtils textTransformationUtils = mTextTransformList.get(i);
-            if(textTransformationUtils.equals(item) && !item.isSelected()) {
-                textTransformationUtils.setSelected(true);
+            TextTransformationModel textTransformationModel = mTextTransformList.get(i);
+            if(textTransformationModel.equals(item) && !item.isSelected()) {
+                textTransformationModel.setSelected(true);
                 mTextTransformList.remove(i);
-                mTextTransformList.add(i, textTransformationUtils);
-                mTags.add(textTransformationUtils.getAssignedTag());
-            } else if(!textTransformationUtils.equals(item) && textTransformationUtils.isSelected()) {
-                textTransformationUtils.setSelected(false);
+                mTextTransformList.add(i, textTransformationModel);
+                mTags.add(textTransformationModel.getAssignedTag());
+                addTag(textTransformationModel.getAssignedTag());
+            } else if(!textTransformationModel.equals(item) && textTransformationModel.isSelected()) {
+                textTransformationModel.setSelected(false);
                 mTextTransformList.remove(i);
-                mTextTransformList.add(i, textTransformationUtils);
-                mTags.remove(textTransformationUtils.getAssignedTag());
+                mTextTransformList.add(i, textTransformationModel);
+                mTags.remove(textTransformationModel.getAssignedTag());
+                removeTag(textTransformationModel.getAssignedTag());
             }
         }
         notifyDataSetChanged();
+    }
+
+    private void addTag(String tag) {
+        mEntryContent.setText(mEntryContent.getText().append("<" + tag + ">"));
+    }
+
+    private void removeTag(String tag) {
+        mEntryContent.setText(mEntryContent.getText().append("</" + tag + ">"));
     }
 }

@@ -23,9 +23,9 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         //Views Binding
-        mLogInBtn = (Button) findViewById(R.id.LogInBtn);
-        mSignUpBtn = (Button) findViewById(R.id.SignUpBtn);
-        mWelcomeTitleTV = (TextView) findViewById(R.id.WelcomeTextView);
+        mLogInBtn = findViewById(R.id.LogInBtn);
+        mSignUpBtn = findViewById(R.id.SignUpBtn);
+        mWelcomeTitleTV = findViewById(R.id.WelcomeTextView);
 
         //Implementing Functionalities
         mWelcomeTitleTV.setText(Html.fromHtml(getResources().getString(R.string.welcoming_text)));

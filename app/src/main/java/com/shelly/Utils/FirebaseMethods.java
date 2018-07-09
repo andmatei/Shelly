@@ -38,7 +38,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class FirebaseMethods {
-
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mRefDatabase;
@@ -85,7 +84,7 @@ public class FirebaseMethods {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(!task.isSuccessful())
-                        Toast.makeText(mContext, "Couldn't send verification email.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, mContext.getString(R.string.error_send_email_verification), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -111,13 +110,13 @@ public class FirebaseMethods {
                     mContext.startActivity(i);
                     ((Activity) mContext).finish();
                 } else {
-                    if(AccountType.equals("Member")) {
+                    if(AccountType.equals(mContext.getString(R.string.member))) {
                         if(!dataSnapshot.child(mContext.getString(R.string.dbfield_members)).hasChild(UserID)) {
                             Intent i = new Intent(mContext, FinalSetUpActivity.class);
                             mContext.startActivity(i);
                             ((Activity) mContext).finish();
                         }
-                    } else if(AccountType.equals("Ambassador")) {
+                    } else if(AccountType.equals(mContext.getString(R.string.ambassador))) {
                         if(!dataSnapshot.child(mContext.getString(R.string.dbfield_ambassadors)).hasChild(UserID)) {
                             Intent i = new Intent(mContext, FinalSetUpActivity.class);
                             mContext.startActivity(i);
@@ -137,6 +136,7 @@ public class FirebaseMethods {
     public void initializeActivities(final HashMap<String, Integer> mTestResults) {
 
         //TODO 1: Implement the method to advance the user to the next level when retaking the test
+        //TODO 2: Implement the method to verify if activities exist
 
         Query query = mRefDatabase.child(mContext.getString(R.string.dbfield_resources)).child(mContext.getString(R.string.dbfield_activities));
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -174,8 +174,9 @@ public class FirebaseMethods {
 
     public void addPoints(final int Points) {
         Query query = mRefDatabase
-                .child(mContext.getString(R.string.dbfield_members)).
-                        child(UserID);
+                .child(mContext.getString(R.string.dbfield_members))
+                .child(UserID);
+
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -212,7 +213,7 @@ public class FirebaseMethods {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
             String Date = getTimestamp(0);
             try {
-                if(sdf.parse(activityStatus.getChangeDate()).compareTo(sdf.parse(Date)) < 0) {
+                if(sdf.parse(activityStatus.getChangeDate()).compareTo(sdf.parse(Date)) <= 0) {
                     return true;
                 }
             } catch (ParseException e) {
@@ -257,7 +258,8 @@ public class FirebaseMethods {
                         child(mContext.getString(R.string.dbfield_activities)).
                         child(activityStatus.getFactor()).
                         child(""+activityStatus.getLevel()).
-                        child(""+activityStatus.getNumber()).getChildrenCount(); i++) {
+                        child(""+activityStatus.getNumber()).
+                        child(mContext.getString(R.string.dbfield_activitiy_tasks)).getChildrenCount(); i++) {
                     mTaskStatusList.add(false);
                 }
                 activityStatus.setTaskStatusList(mTaskStatusList);

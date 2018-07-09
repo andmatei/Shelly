@@ -1,28 +1,19 @@
-package com.shelly.Utils;
+package com.shelly.Adapters;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.graphics.Paint;
-import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.shelly.Models.ActivityStatus;
 import com.shelly.Models.ActivityTask;
 import com.shelly.R;
-
-import org.w3c.dom.Text;
+import com.shelly.Utils.TextTransformationUtils;
 
 import java.util.List;
 
@@ -50,39 +41,51 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final ActivityTask activityTask = mTaskList.get(position);
         final String mDescriptionCondensed = activityTask.getDescription().substring(0, 25) + "...";
-        final LayerDrawable layerDrawable = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.bg_task_checkbox);
+        final TextTransformationUtils textTransformationUtils = new TextTransformationUtils(mContext);
+        final AnimatedVectorDrawable lineToTick = (AnimatedVectorDrawable) mContext.getDrawable(R.drawable.avd_line_to_tick);
+        final AnimatedVectorDrawable tickToLine = (AnimatedVectorDrawable) mContext.getDrawable(R.drawable.avd_tick_to_line);
 
         holder.mTaskTitle.setText(activityTask.getTitle());
         holder.mTaskDescription.setText(Html.fromHtml(mDescriptionCondensed));
         if(mTaskStatusList.get(position)) {
-            holder.mCheckTask.setBackground(layerDrawable.findDrawableByLayerId(R.id.Checked));
-            holder.mCheckTask.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_checked_task));
+            holder.mCheckTask.setImageDrawable(tickToLine);
+            holder.mTaskTitle.setTextColor(mContext.getResources().getColor(R.color.textColor50));
+            holder.mTaskDescription.setTextColor(mContext.getResources().getColor(R.color.textColor50));
+            textTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_PUT_STRIKETHROUGH);
+
         } else {
-            holder.mCheckTask.setBackground(layerDrawable.findDrawableByLayerId(R.id.Unchecked));
-            holder.mCheckTask.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_unselected_domain));
+            holder.mCheckTask.setImageDrawable(lineToTick);
+            holder.mTaskTitle.setTextColor(mContext.getResources().getColor(R.color.textColor));
+            holder.mTaskDescription.setTextColor(mContext.getResources().getColor(R.color.textColor));
         }
         if(mCheckable) {
             holder.mCheckTask.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mTaskStatusList.set(position, !mTaskStatusList.get(position));
-                    if(mTaskStatusList.get(position)) {
-                        holder.mCheckTask.setBackground(layerDrawable.findDrawableByLayerId(R.id.Checked));
-                        holder.mCheckTask.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_checked_task));
+                    if(mTaskStatusList.get(holder.getAdapterPosition())) {
+                        holder.mCheckTask.setImageDrawable(tickToLine);
+                        holder.mTaskTitle.setTextColor(mContext.getResources().getColor(R.color.textColor));
+                        holder.mTaskDescription.setTextColor(mContext.getResources().getColor(R.color.textColor));
+                        textTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_ERASE_STRIKETHROUGH);
+                        tickToLine.start();
                     } else {
-                        holder.mCheckTask.setBackground(layerDrawable.findDrawableByLayerId(R.id.Unchecked));
-                        holder.mCheckTask.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_unselected_domain));
+                        holder.mCheckTask.setImageDrawable(lineToTick);
+                        holder.mTaskTitle.setTextColor(mContext.getResources().getColor(R.color.textColor50));
+                        holder.mTaskDescription.setTextColor(mContext.getResources().getColor(R.color.textColor50));
+                        lineToTick.start();
+                        textTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_PUT_STRIKETHROUGH);
                     }
+                    mTaskStatusList.set(holder.getAdapterPosition(), !mTaskStatusList.get(holder.getAdapterPosition()));
                 }
 
 
             });
         } else {
             holder.mCheckTask.setOnClickListener(null);
-            holder.mTaskTitle.setPaintFlags(holder.mTaskTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            textTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_PUT_STRIKETHROUGH);
         }
         holder.mExpandDescription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +93,8 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
                 holder.mExpandDescription.setScaleY(holder.mExpandDescription.getScaleY() * -1);
                 if(holder.mDescriptionCondensed) {
                     holder.mTaskDescription.setText(Html.fromHtml(activityTask.getDescription()));
-                    holder.mTaskDescription.setTranslationY(16);
                 } else {
                     holder.mTaskDescription.setText(Html.fromHtml(mDescriptionCondensed));
-                    holder.mTaskDescription.setTranslationY(0);
                 }
                 holder.mDescriptionCondensed = !holder.mDescriptionCondensed;
             }

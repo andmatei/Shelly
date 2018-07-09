@@ -1,4 +1,4 @@
-package com.shelly.Utils;
+package com.shelly.Adapters;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -19,20 +19,21 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.shelly.Adapters.TaskListAdapter;
 import com.shelly.Models.ActivityResource;
 import com.shelly.Models.ActivityStatus;
 import com.shelly.Models.ActivityTask;
 import com.shelly.R;
-
-import org.w3c.dom.Text;
+import com.shelly.Utils.Constants;
+import com.shelly.Utils.FirebaseMethods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ import java.util.List;
 public class DialogActivityManager extends Dialog {
 
     private Context mContext;
-    private Bundle mBundle;
+    private int mPosition;
 
     //Views
     private ConstraintLayout mActivityManagerWrapper;
@@ -73,11 +74,11 @@ public class DialogActivityManager extends Dialog {
     private long mNumber;
     private long mLevel;
 
-    public DialogActivityManager(@NonNull Context context, Bundle mBundle, ActivityStatus mActivityStatus) {
+    public DialogActivityManager(@NonNull Context context, ActivityStatus activityStatus, int position) {
         super(context);
         this.mContext = context;
-        this.mBundle = mBundle;
-        this.mActivityStatus = mActivityStatus;
+        this.mActivityStatus = activityStatus;
+        this.mPosition = position;
         Log.e("ActivityStatus", "" + this.mActivityStatus.toString());
     }
 
@@ -116,52 +117,27 @@ public class DialogActivityManager extends Dialog {
     }
 
     private void initializeActivityData() {
-        mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = mRefDatabase.child(mContext.getString(R.string.dbfield_resources))
+                .child(mContext.getString(R.string.dbfield_activities))
+                .child(mActivityStatus.getFactor())
+                .child(""+mActivityStatus.getLevel())
+                .child(""+mActivityStatus.getNumber());
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mActivityResource = new ActivityResource();
                 mInitialActivityResource = new ActivityResource();
-                for(DataSnapshot ds:dataSnapshot.getChildren()) {
-                    if(ds.getKey().equals(mContext.getString(R.string.dbfield_resources))) {
-                        try {
-                            mActivityResource.setImageURL(ds.
-                                    child(mContext.getString(R.string.dbfield_activities)).
-                                    child(mActivityStatus.getFactor()).
-                                    child(""+mActivityStatus.getLevel()).
-                                    child(""+mActivityStatus.getNumber()).
-                                    getValue(ActivityResource.class).getImageURL()
-                            );
 
-                            mActivityResource.setTasks(ds.
-                                    child(mContext.getString(R.string.dbfield_activities)).
-                                    child(mActivityStatus.getFactor()).
-                                    child(""+mActivityStatus.getLevel()).
-                                    child(""+mActivityStatus.getNumber()).
-                                    getValue(ActivityResource.class).getTasks()
-                            );
+                mActivityResource = dataSnapshot.getValue(ActivityResource.class);
+                mInitialActivityResource.setImageURL(mActivityResource.getImageURL());
+                mInitialActivityResource.setTasks(mActivityResource.getTasks());
+                Log.e("Initial Resource", mInitialActivityResource.toString());
 
-                            mInitialActivityResource.setImageURL(ds.
-                                    child(mContext.getString(R.string.dbfield_activities)).
-                                    child(mActivityStatus.getFactor()).
-                                    child(""+mActivityStatus.getLevel()).
-                                    child(""+mActivityStatus.getNumber()).
-                                    getValue(ActivityResource.class).getImageURL()
-                            );
-
-                            mInitialActivityResource.setTasks(ds.
-                                    child(mContext.getString(R.string.dbfield_activities)).
-                                    child(mActivityStatus.getFactor()).
-                                    child(""+mActivityStatus.getLevel()).
-                                    child(""+mActivityStatus.getNumber()).
-                                    getValue(ActivityResource.class).getTasks()
-                            );
-
-                        } catch (NullPointerException e) {
-                            Log.e("NullPointerException", ""+e);
-                        }
-                    }
-                }
-                initializeWidgets();
+                mLevel = mActivityStatus.getLevel();
+                mNumber = mActivityStatus.getNumber();
+                initializeDataWidgets(true, mActivityStatus.getTaskStatusList());
+                initializeNavigationWidgets();
             }
 
             @Override
@@ -171,7 +147,7 @@ public class DialogActivityManager extends Dialog {
         });
     }
 
-    private void initializeDataWidgets(boolean Checkable, int Progress, List<Boolean> TaskStatusList) {
+    private void initializeDataWidgets(boolean Checkable, List<Boolean> TaskStatusList) {
 
         Log.e("Resource", "" + mActivityResource.getTasks());
         Log.e("TaskList", ""+TaskStatusList);
@@ -182,6 +158,13 @@ public class DialogActivityManager extends Dialog {
         mString = "Activity " + (mNumber + 1);
         mActivityDialogTitleTV.setText(mString);
 
+        int Progress = 0;
+        for(Boolean b : TaskStatusList) {
+            if(b) {
+                Progress++;
+            }
+        }
+        Progress = Progress * 100 / TaskStatusList.size();
         mString = "Progress: " + Progress + "%";
         mActivityProgressTV.setText(mString);
         mActivityProgressbar.setProgress(Progress);
@@ -198,19 +181,16 @@ public class DialogActivityManager extends Dialog {
         mTaskRecyclerView.setAdapter(mTaskListAdapter);
     }
 
-    private void initializeWidgets() {
-        mLevel = mActivityStatus.getLevel();
-        mNumber = mActivityStatus.getNumber();
+    private void initializeNavigationWidgets() {
 
-        mCongratulationsDialog.setVisibility(View.GONE);
-        initializeDataWidgets(true, mActivityStatus.getProgress(), mActivityStatus.getTaskStatusList());
 
         LayerDrawable mLayerDrawable = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.bg_cardview_activity);
-        final GradientDrawable mGradientDrawable = (GradientDrawable) mLayerDrawable.findDrawableByLayerId(
-                mContext.getResources().getIdentifier("Gradient" + mBundle.get("position"), "id", "com.shelly")
+        final GradientDrawable mGradientDrawable = (GradientDrawable) mLayerDrawable
+                .findDrawableByLayerId(mContext.getResources().getIdentifier("Gradient" + (mPosition % Constants.NUMBER_OF_GRADIENTS), "id", "com.shelly")
         );
-        mGradientDrawable.setCornerRadius(500);
+        mGradientDrawable.setCornerRadius(Constants.DIALOG_ICON_RADIUS);
         mActivityIconIV.setBackground(mGradientDrawable);
+
         mExitDialogIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,12 +217,12 @@ public class DialogActivityManager extends Dialog {
                     mFinishDialogBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mGradientDrawable.setCornerRadius(8);
+                            mGradientDrawable.setCornerRadius(0);
                             dismiss();
                         }
                     });
                 } else {
-                    mGradientDrawable.setCornerRadius(8);
+                    mGradientDrawable.setCornerRadius(0);
                     dismiss();
                 }
             }
@@ -259,46 +239,28 @@ public class DialogActivityManager extends Dialog {
                 if(mNumber == 0 && mLevel == 0) {
                     mPreviousActivity.setVisibility(View.GONE);
                 }
-                mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                Query query = mRefDatabase.child(mContext.getString(R.string.dbfield_resources))
+                        .child(mContext.getString(R.string.dbfield_activities))
+                        .child(mActivityStatus.getFactor())
+                        .child("" + mLevel);
+
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(mNumber < 0) {
                             mLevel--;
-                            mNumber = dataSnapshot.
-                                    child(mContext.getString(R.string.dbfield_resources)).
-                                    child(mContext.getString(R.string.dbfield_activities)).
-                                    child(mActivityStatus.getFactor()).
-                                    child(""+mLevel).getChildrenCount() - 1;
+                            mNumber = dataSnapshot.getChildrenCount() - 1;
                         }
-                        mActivityResource = new ActivityResource();
-                        for(DataSnapshot ds:dataSnapshot.getChildren()) {
-                            if(ds.getKey().equals(mContext.getString(R.string.dbfield_resources))) {
-                                try {
-                                    mActivityResource.setImageURL(ds.
-                                            child(mContext.getString(R.string.dbfield_activities)).
-                                            child(mActivityStatus.getFactor()).
-                                            child(""+mLevel).
-                                            child(""+mNumber).
-                                            getValue(ActivityResource.class).getImageURL()
-                                    );
-
-                                    mActivityResource.setTasks(ds.
-                                            child(mContext.getString(R.string.dbfield_activities)).
-                                            child(mActivityStatus.getFactor()).
-                                            child(""+mLevel).
-                                            child(""+mNumber).
-                                            getValue(ActivityResource.class).getTasks()
-                                    );
-                                } catch (NullPointerException e) {
-                                    Log.e("NullPointerException", ""+e);
-                                }
-                            }
-                        }
+                        mActivityResource = dataSnapshot
+                                .child("" + mNumber)
+                                .getValue(ActivityResource.class);
                         List<Boolean> TaskStatusList = new ArrayList<>();
                         for(int i = 0 ; i < mActivityResource.getTasks().size(); i++) {
                             TaskStatusList.add(true);
                         }
-                        initializeDataWidgets(false, 100, TaskStatusList);
+                        Log.e("ActivityResource", mActivityResource.toString());
+                        initializeDataWidgets(false, TaskStatusList);
                     }
 
                     @Override
@@ -318,49 +280,29 @@ public class DialogActivityManager extends Dialog {
                 if(mNumber == mActivityStatus.getNumber() && mLevel == mActivityStatus.getLevel()) {
                     mNextActivity.setVisibility(View.GONE);
                 }
-                mRefDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                Query query = mRefDatabase.child(mContext.getString(R.string.dbfield_resources))
+                        .child(mContext.getString(R.string.dbfield_activities))
+                        .child(mActivityStatus.getFactor())
+                        .child(""+mLevel);
+
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(mNumber > dataSnapshot.
-                                child(mContext.getString(R.string.dbfield_resources)).
-                                child(mContext.getString(R.string.dbfield_activities)).
-                                child(mActivityStatus.getFactor()).
-                                child(""+mLevel).getChildrenCount() - 1) {
+                        if(mNumber > dataSnapshot.getChildrenCount() - 1) {
                             mNumber = 0;
                             mLevel++;
                         }
-                        mActivityResource = new ActivityResource();
-                        for(DataSnapshot ds:dataSnapshot.getChildren()) {
-                            if(ds.getKey().equals(mContext.getString(R.string.dbfield_resources))) {
-                                try {
-                                    mActivityResource.setImageURL(ds.
-                                            child(mContext.getString(R.string.dbfield_activities)).
-                                            child(mActivityStatus.getFactor()).
-                                            child(""+mLevel).
-                                            child(""+mNumber).
-                                            getValue(ActivityResource.class).getImageURL()
-                                    );
-
-                                    mActivityResource.setTasks(ds.
-                                            child(mContext.getString(R.string.dbfield_activities)).
-                                            child(mActivityStatus.getFactor()).
-                                            child(""+mLevel).
-                                            child(""+mNumber).
-                                            getValue(ActivityResource.class).getTasks()
-                                    );
-
-                                } catch (NullPointerException e) {
-                                    Log.e("NullPointerException", ""+e);
-                                }
-                            }
-                        }
+                        mActivityResource = dataSnapshot
+                                .child("" + mNumber)
+                                .getValue(ActivityResource.class);
                         List<Boolean> TaskStatusList = new ArrayList<>();
                         if(mNumber == mActivityStatus.getNumber() && mLevel == mActivityStatus.getLevel()) {
-                            initializeDataWidgets(true, mActivityStatus.getProgress(), mActivityStatus.getTaskStatusList());
+                            initializeDataWidgets(true, mActivityStatus.getTaskStatusList());
                         } else {
                             for(int i = 0 ; i < mActivityResource.getTasks().size(); i++) {
                                 TaskStatusList.add(true);
-                                initializeDataWidgets(false,100, TaskStatusList);
+                                initializeDataWidgets(false, TaskStatusList);
                             }
                         }
 

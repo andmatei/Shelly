@@ -16,7 +16,6 @@ import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -41,9 +40,9 @@ public class BlurMethods {
 
     private static Bitmap captureView(View view) {
         view.measure(
-                View.MeasureSpec.makeMeasureSpec(190, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(190, View.MeasureSpec.EXACTLY));
-        view.layout(0, 0, 190, 190);
+                View.MeasureSpec.makeMeasureSpec(Constants.ACTIVITY_CARDVIEW_SIZE, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(Constants.ACTIVITY_CARDVIEW_SIZE, View.MeasureSpec.EXACTLY));
+        view.layout(0, 0, Constants.ACTIVITY_CARDVIEW_SIZE, Constants.ACTIVITY_CARDVIEW_SIZE);
         Bitmap image = Bitmap.createBitmap(view.getMeasuredHeight(),
                 view.getMeasuredHeight(),
                 Bitmap.Config.ARGB_4444);

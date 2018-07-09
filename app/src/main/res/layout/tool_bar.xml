@@ -8,7 +8,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="8dp"
-        android:background="@drawable/bg_menu_btn"
+        android:background="@drawable/bg_round_primary_color"
         android:src="@drawable/ic_menu"
         android:scaleType="fitCenter"
         android:elevation="5dp"

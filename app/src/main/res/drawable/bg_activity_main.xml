@@ -2,17 +2,17 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/Background0"
-        android:drawable="@drawable/bg_main_activity0"/>
+        android:drawable="@drawable/bg_activity_main0"/>
     <item
         android:id="@+id/Background1"
-        android:drawable="@drawable/bg_main_activity1"/>
+        android:drawable="@drawable/bg_activity_main1"/>
     <item
         android:id="@+id/Background2"
-        android:drawable="@drawable/bg_main_activity2"/>
+        android:drawable="@drawable/bg_activity_main2"/>
     <item
         android:id="@+id/Background3"
-        android:drawable="@drawable/bg_main_activity3"/>
+        android:drawable="@drawable/bg_activity_main3"/>
     <item
         android:id="@+id/Background4"
-        android:drawable="@drawable/bg_main_activity4"/>
+        android:drawable="@drawable/bg_activity_main4"/>
 </layer-list>

@@ -47,7 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRefDatabase;
     private FirebaseMethods mFirebaseMethods;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,20 +59,14 @@ public class SignUpActivity extends AppCompatActivity {
         mRefDatabase = mDatabase.getReference();
         mFirebaseMethods = new FirebaseMethods(this);
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-            }
-        };
 
         //Views Binding
-        mBackBtn = (ImageButton) findViewById(R.id.BackImageButton);
-        mSignUpBtn = (Button) findViewById(R.id.SignUpButton);
-        mEmailET = (EditText) findViewById(R.id.EmailEditText);
-        mPasswordET = (EditText) findViewById(R.id.PasswordEditText);
-        mConfirmPasswordET = (EditText) findViewById(R.id.ConfirmPasswordEditText);
-        mUsernameEt = (EditText) findViewById(R.id.UsernameEditText);
+        mBackBtn = findViewById(R.id.BackImageButton);
+        mSignUpBtn = findViewById(R.id.SignUpButton);
+        mEmailET = findViewById(R.id.EmailEditText);
+        mPasswordET = findViewById(R.id.PasswordEditText);
+        mConfirmPasswordET = findViewById(R.id.ConfirmPasswordEditText);
+        mUsernameEt = findViewById(R.id.UsernameEditText);
 
         //Implementing Functionalities
         mBackBtn.setOnClickListener(new View.OnClickListener() {
@@ -94,23 +87,23 @@ public class SignUpActivity extends AppCompatActivity {
                 String ConfPassword = mConfirmPasswordET.getText().toString();
 
                 if(TextUtils.isEmpty(Email)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter an email address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.error_email_empty), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(Username)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter a username", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.error_username_empty), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(Password)){
-                    Toast.makeText(SignUpActivity.this, "Please enter a password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.error_password_empty), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(Password.length() < 6) {
-                    Toast.makeText(SignUpActivity.this, "Please enter a minimum 6 character password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.error_password_short), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(!Password.equals(ConfPassword)) {
-                    Toast.makeText(SignUpActivity.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.error_password_match), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 checkIfUsernameExists();
@@ -121,8 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void checkIfUsernameExists() {
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        Query query = reference
+        Query query = mRefDatabase
                 .child(getString(R.string.dbfield_users))
                 .orderByChild(getString(R.string.dbfield_user_username))
                 .equalTo(Username);
@@ -133,14 +125,14 @@ public class SignUpActivity extends AppCompatActivity {
                 boolean UsernameExists = false;
                 for(DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
                     if (singleSnapshot.exists()){
-                        Toast.makeText(SignUpActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, getString(R.string.error_username_exists), Toast.LENGTH_SHORT).show();
                         UsernameExists = true;
                         break;
                     }
                 }
                 if(!UsernameExists) {
                     mFirebaseMethods.registerNewEmail(Email, Password, Username);
-                    Toast.makeText(SignUpActivity.this, "Signup successful. A verification email has been sent to your inbox.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT).show();
                     mAuth.signOut();
                     finish();
                 }

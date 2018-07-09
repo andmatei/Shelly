@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -20,9 +23,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.shelly.Models.TextTransformationUtils;
+import com.shelly.Models.EntryContent;
+import com.shelly.Models.TextTransformationModel;
 import com.shelly.R;
-import com.shelly.Utils.TextTransformListAdapter;
+import com.shelly.Adapters.TextTransformListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +39,7 @@ public class EditModeActivity extends AppCompatActivity {
     private ImageButton mSettingsEditMode;
     private ImageButton mAddResource;
     private ScrollView mScrollView;
-    private EditText mEntryContent;
+    private EditText mEntryContentET;
     private RecyclerView mTextTypeRV;
     private RecyclerView mTextStyleRV;
     private TextTransformListAdapter mTextTypeAdapter;
@@ -50,9 +54,9 @@ public class EditModeActivity extends AppCompatActivity {
     private DatabaseReference mRefDatabase;
 
     //Variables
-    private List<TextTransformationUtils> mTextTypeList;
-    private List<TextTransformationUtils> mTextStyleList;
-    private List<String> mTags;
+    private List<TextTransformationModel> mTextTypeList;
+    private List<TextTransformationModel> mTextStyleList;
+    private EntryContent mEntryContent;
     boolean mTextFormatMenuOpen = false;
 
     @Override
@@ -66,7 +70,7 @@ public class EditModeActivity extends AppCompatActivity {
         mSettingsEditMode = findViewById(R.id.EditModeSettingsImageButton);
         mAddResource = findViewById(R.id.EditModeAddImageButton);
         mScrollView = findViewById(R.id.EditModeScrollView);
-        mEntryContent = findViewById(R.id.EditModeContentEditText);
+        mEntryContentET = findViewById(R.id.EditModeContentEditText);
         mTextTypeRV = findViewById(R.id.TextTypeRecyclerView);
         mTextStyleRV = findViewById(R.id.TextStyleRecyclerView);
         mTextFormatMenu = findViewById(R.id.TextFormatMenu);
@@ -81,21 +85,41 @@ public class EditModeActivity extends AppCompatActivity {
         //Variable Binding
         mTextTypeList = new ArrayList<>();
         mTextStyleList = new ArrayList<>();
-        mTags = new ArrayList<>();
+        mEntryContent = new EntryContent();
+        mEntryContent.setTags(new ArrayList<String>());
 
         //Implementing Functionalities
+        mEntryContentET.setText(Html.fromHtml("<b>Hello there...</b>"));
+        mEntryContent.setText(new StringBuffer().append(Html.toHtml(mEntryContentET.getText())));
         initializeTextTransformation();
-        mTextTypeAdapter = new TextTransformListAdapter(mTextTypeList, this, 0, mTags);
-        mTextStyleAdapter = new TextTransformListAdapter(mTextStyleList, this, 1, mTags);
+        mTextTypeAdapter = new TextTransformListAdapter(mTextTypeList, this, 0, mEntryContent);
+        mTextStyleAdapter = new TextTransformListAdapter(mTextStyleList, this, 1, mEntryContent);
         mTextTypeRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mTextStyleRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mTextTypeRV.setAdapter(mTextTypeAdapter);
         mTextStyleRV.setAdapter(mTextStyleAdapter);
 
+        mEntryContentET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         mSettingsEditMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = mEntryContent.getText().toString();
+                String text = mEntryContentET.getText().toString();
                 Log.e("Text", text);
             }
         });
@@ -189,52 +213,48 @@ public class EditModeActivity extends AppCompatActivity {
         Typeface SegoeUI = ResourcesCompat.getFont(this, R.font.segoe_ui);
         Typeface SegoeUISemibold = ResourcesCompat.getFont(this, R.font.segoe_semibold);
 
-        TextTransformationUtils textTransformationUtils = new TextTransformationUtils();
-        textTransformationUtils.setFieldValue("Title");
-        textTransformationUtils.setAssignedTag("h2");
-        textTransformationUtils.setTextFont(SegoeUISemibold);
-        textTransformationUtils.setSelected(false);
-        mTextTypeList.add(textTransformationUtils);
+        TextTransformationModel textTransformationModel = new TextTransformationModel();
+        textTransformationModel.setFieldValue("Title");
+        textTransformationModel.setAssignedTag("h1");
+        textTransformationModel.setTextFont(SegoeUISemibold);
+        textTransformationModel.setSelected(false);
+        mTextTypeList.add(textTransformationModel);
 
-        textTransformationUtils = new TextTransformationUtils();
-        textTransformationUtils.setFieldValue("<b>Heading<b>");
-        textTransformationUtils.setAssignedTag("h4");
-        textTransformationUtils.setTextFont(SegoeUI);
-        textTransformationUtils.setSelected(false);
-        mTextTypeList.add(textTransformationUtils);
+        textTransformationModel = new TextTransformationModel();
+        textTransformationModel.setFieldValue("<b>Heading<b>");
+        textTransformationModel.setAssignedTag("h3");
+        textTransformationModel.setTextFont(SegoeUI);
+        textTransformationModel.setSelected(false);
+        mTextTypeList.add(textTransformationModel);
 
-        textTransformationUtils = new TextTransformationUtils();
-        textTransformationUtils.setFieldValue("Body");
-        textTransformationUtils.setAssignedTag("p");
-        textTransformationUtils.setTextFont(SegoeUI);
-        textTransformationUtils.setSelected(true);
-        mTextTypeList.add(textTransformationUtils);
-        mTags.add(textTransformationUtils.getAssignedTag());
+        textTransformationModel = new TextTransformationModel();
+        textTransformationModel.setFieldValue("Body");
+        textTransformationModel.setAssignedTag("p");
+        textTransformationModel.setTextFont(SegoeUI);
+        textTransformationModel.setSelected(true);
+        mTextTypeList.add(textTransformationModel);
+        mEntryContent.getTags().add(textTransformationModel.getAssignedTag());
 
-        textTransformationUtils = new TextTransformationUtils();
-        textTransformationUtils.setFieldValue("<b>B<b>");
-        textTransformationUtils.setAssignedTag("b");
-        textTransformationUtils.setTextFont(SegoeUI);
-        textTransformationUtils.setSelected(false);
-        mTextStyleList.add(textTransformationUtils);
+        textTransformationModel = new TextTransformationModel();
+        textTransformationModel.setFieldValue("<b>B<b>");
+        textTransformationModel.setAssignedTag("b");
+        textTransformationModel.setTextFont(SegoeUI);
+        textTransformationModel.setSelected(false);
+        mTextStyleList.add(textTransformationModel);
 
-        textTransformationUtils = new TextTransformationUtils();
-        textTransformationUtils.setFieldValue("<i>I<i>");
-        textTransformationUtils.setAssignedTag("i");
-        textTransformationUtils.setTextFont(SegoeUI);
-        textTransformationUtils.setSelected(false);
-        mTextStyleList.add(textTransformationUtils);
+        textTransformationModel = new TextTransformationModel();
+        textTransformationModel.setFieldValue("<i>I<i>");
+        textTransformationModel.setAssignedTag("i");
+        textTransformationModel.setTextFont(SegoeUI);
+        textTransformationModel.setSelected(false);
+        mTextStyleList.add(textTransformationModel);
 
-        textTransformationUtils = new TextTransformationUtils();
-        textTransformationUtils.setFieldValue("<u>U<u>");
-        textTransformationUtils.setAssignedTag("u");
-        textTransformationUtils.setTextFont(SegoeUI);
-        textTransformationUtils.setSelected(false);
-        mTextStyleList.add(textTransformationUtils);
-
-        for(TextTransformationUtils t : mTextTypeList) {
-            Log.e("testStyle", "" + t.getFieldValue());
-        }
+        textTransformationModel = new TextTransformationModel();
+        textTransformationModel.setFieldValue("<u>U<u>");
+        textTransformationModel.setAssignedTag("u");
+        textTransformationModel.setTextFont(SegoeUI);
+        textTransformationModel.setSelected(false);
+        mTextStyleList.add(textTransformationModel);
 
     }
 }

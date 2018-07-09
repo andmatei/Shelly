@@ -47,7 +47,7 @@
             <ImageView
                 android:id="@+id/AccountTypeImageView"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="140dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_member" />
 
@@ -60,7 +60,7 @@
                 android:gravity="center"
                 android:text="@string/member_account_type_title"
                 android:textColor="@color/textColor"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/AccountDescriptionTextView"
@@ -72,7 +72,7 @@
                 android:gravity="center"
                 android:lineSpacingMultiplier="0.9"
                 android:text="@string/member_account_type_description"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
 
         </LinearLayout>
