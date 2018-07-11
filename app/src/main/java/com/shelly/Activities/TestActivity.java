@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.shelly.R;
+import com.shelly.Utils.Constants;
 import com.shelly.Utils.FirebaseMethods;
 
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class TestActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 int progress = mSeekBar.getProgress();
-                String key =  mQuestionList.get(mNumQuestion).Elements.get(mNumElement).factor;
+                String key =  mQuestionList.get(mNumQuestion).Elements.get(mNumElement).getFactor();
                 mTestResults.put(key, mTestResults.get(key) + progress);
 
                 mNumElement++;
@@ -120,6 +121,7 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
+        mSeekBar.setMax(Constants.NUMBER_OF_EMOJIS);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -159,7 +161,7 @@ public class TestActivity extends AppCompatActivity {
 
         //Initializing the Emoji Array
         String emojiString = "ic_emoji";
-        for(int index = 0; index <= MaxSeekBar; index++) {
+        for(int index = 0; index <= Constants.NUMBER_OF_EMOJIS; index++) {
             int emojiID = getResources().getIdentifier(emojiString + index, "drawable", "com.shelly");
             mEmojiList.add(emojiID);
         }
@@ -170,7 +172,6 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds:dataSnapshot.getChildren()) {
-                    Log.e("Snapshot", ""+ds);
                     QuestionItem  questionItem = ds.getValue(QuestionItem.class);
                     mQuestionList.add(questionItem);
                 }

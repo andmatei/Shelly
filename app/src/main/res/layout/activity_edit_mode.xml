@@ -16,8 +16,8 @@
 
         <ImageButton
             android:id="@+id/ExitEditModeImageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:padding="12dp"
             android:src="@drawable/ic_back_primary_color"
@@ -30,8 +30,8 @@
 
         <ImageButton
             android:id="@+id/TextFormatImageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="16dp"
             android:padding="12dp"
             android:scaleType="fitCenter"
@@ -44,8 +44,8 @@
 
         <ImageButton
             android:id="@+id/EditModeSettingsImageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="8dp"
             android:padding="12dp"
             android:scaleType="fitCenter"
@@ -58,8 +58,8 @@
 
         <ImageButton
             android:id="@+id/EditModeAddImageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:padding="12dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_add_primary_color"
@@ -98,7 +98,7 @@
                 android:hint="@string/editmode_hint"
                 android:fontFamily="@font/segoe_ui"
                 android:textSize="16sp"
-                android:textColor="@color/textColor"
+                android:textColor="@color/textColor75"
                 android:lineSpacingMultiplier="1.1"
                 android:background="@android:color/transparent"
                 android:inputType="textMultiLine"

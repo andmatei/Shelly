@@ -28,8 +28,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.shelly.Models.ActivityStatus;
 import com.shelly.R;
-import com.shelly.Utils.ActivityListAdapter;
-import com.shelly.Utils.BlurMethods;
+import com.shelly.Adapters.ActivityListAdapter;
+import com.shelly.Utils.Constants;
 import com.shelly.Utils.FirebaseMethods;
 
 import java.util.ArrayList;
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseMethods mFirebaseMethods;
 
     //Variables
-    private BlurMethods mBlurMethods;
     private List<ActivityStatus> mActivityList;
     private int mPosition = 0;
 
@@ -87,9 +86,6 @@ public class MainActivity extends AppCompatActivity {
         mRefDatabase = mDatabase.getReference();
         mFirebaseMethods = new FirebaseMethods(this);
 
-        //Variable Binding
-        mBlurMethods = new BlurMethods();
-
         if(mUser == null) {
             Intent i = new Intent(this, WelcomeActivity.class);
             startActivity(i);
@@ -103,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 Window w = getWindow(); // in Activity's onCreate() for instance
                 w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             }
-
             initializeData();
         }
     }
@@ -151,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
                     int pos = linearLayoutManager.findFirstCompletelyVisibleItemPosition();
                     if(pos != mPosition && pos != -1) {
                         mPosition = pos;
-                        LayerDrawable layerDrawable = (LayerDrawable) getResources().getDrawable(R.drawable.bg_main_activity);
-                        final Drawable drawable = layerDrawable.findDrawableByLayerId(getResources().getIdentifier("Background" + (mPosition % 5), "id", "com.shelly"));
+                        LayerDrawable layerDrawable = (LayerDrawable) getResources().getDrawable(R.drawable.bg_activity_main);
+                        final Drawable drawable = layerDrawable.findDrawableByLayerId(getResources().getIdentifier("Background" + (mPosition % Constants.NUMBER_OF_GRADIENTS), "id", "com.shelly"));
 
                         Animation fadeOut = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_out);
                         mSecondBackground.setBackground(mBackground.getBackground());

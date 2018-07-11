@@ -34,7 +34,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/bg_domain_checkbox"
+        android:background="@drawable/bg_round_checkbox"
         android:elevation="4dp"
         android:src="@drawable/ic_unselected_domain"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -43,11 +43,11 @@ public class LogInActivity extends AppCompatActivity {
         mFirebaseMethods = new FirebaseMethods(this);
 
         //Views Binding
-        mBackBtn = (ImageButton) findViewById(R.id.BackImageButton);
-        mLogInBtn = (Button) findViewById(R.id.LogInButton);
-        mEmailET = (EditText) findViewById(R.id.EmailEditText);
-        mPasswordET = (EditText) findViewById(R.id.PasswordEditText);
-        mForgotPasswordBtn = (Button) findViewById(R.id.ForgotPasswordButton);
+        mBackBtn = findViewById(R.id.BackImageButton);
+        mLogInBtn = findViewById(R.id.LogInButton);
+        mEmailET = findViewById(R.id.EmailEditText);
+        mPasswordET = findViewById(R.id.PasswordEditText);
+        mForgotPasswordBtn = findViewById(R.id.ForgotPasswordButton);
 
         //Implementing Functionalities
         mBackBtn.setOnClickListener(new View.OnClickListener() {
@@ -65,12 +65,12 @@ public class LogInActivity extends AppCompatActivity {
                 String Email =  mEmailET.getText().toString();
                 String Password = mPasswordET.getText().toString();
                 if(TextUtils.isEmpty(Email)) {
-                    Toast.makeText(LogInActivity.this, "Please enter email address", Toast.LENGTH_SHORT).show();
-                    mEmailET.setError("Required");
+                    Toast.makeText(LogInActivity.this, getString(R.string.error_email_empty), Toast.LENGTH_SHORT).show();
+                    mEmailET.setError(getString(R.string.error_required));
                     return;
                 }
                 else if(TextUtils.isEmpty(Password)) {
-                    Toast.makeText(LogInActivity.this, "Please enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LogInActivity.this, getString(R.string.error_password_empty), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -78,7 +78,7 @@ public class LogInActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()) {
-                            Toast.makeText(LogInActivity.this, "Authentification failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogInActivity.this, getString(R.string.error_auth), Toast.LENGTH_SHORT).show();
                         } else {
                             try {
                                 //if(mAuth.getCurrentUser().isEmailVerified()) {
@@ -87,7 +87,7 @@ public class LogInActivity extends AppCompatActivity {
                                     Intent i = new Intent(LogInActivity.this, MainActivity.class);
                                     startActivity(i);
                                 /*} else {
-                                    Toast.makeText(LogInActivity.this, "Email is not verified. Check your email inbox.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LogInActivity.this, getString(R.string.error_email_verification, Toast.LENGTH_SHORT).show();
                                     mAuth.signOut();
                                 }*/
                             } catch (NullPointerException e) {

@@ -102,9 +102,9 @@ public class AccountTypeActivity extends AppCompatActivity {
         mFinishActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String AccountType = "Member";
+                String AccountType = getString(R.string.member);
                 if(!mMemberAccountType) {
-                    AccountType = "Ambassador";
+                    AccountType = getString(R.string.ambassador);
                 }
                 mRefDatabase.child(getString(R.string.dbfield_users)).
                                 child(mUser.getUid()).

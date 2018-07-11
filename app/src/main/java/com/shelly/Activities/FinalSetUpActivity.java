@@ -61,7 +61,7 @@ public class FinalSetUpActivity extends AppCompatActivity {
                 mAccountType = (String) dataSnapshot.child(getString(R.string.dbfield_users)).
                                 child(mUser.getUid()).
                                     child(getString(R.string.dbfield_user_accounttype)).getValue();
-                if (mAccountType != null && mAccountType.equals("Ambassador")) {
+                if (mAccountType != null && mAccountType.equals(getString(R.string.ambassador))) {
                     mAccountTypeIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_ambassador));
                     mTaskTitleTV.setText(getResources().getString(R.string.set_up_ambassador_title));
                     mTaskDescriptionTV.setText(getResources().getString(R.string.set_up_ambassador_description));
@@ -78,7 +78,7 @@ public class FinalSetUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i;
-                if(mAccountType.equals("Ambassador")) {
+                if(mAccountType.equals(getString(R.string.ambassador))) {
                     i = new Intent(FinalSetUpActivity.this, DomainActivity.class);
                 } else {
                     i = new Intent(FinalSetUpActivity.this, TestActivity.class);

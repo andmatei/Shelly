@@ -2,15 +2,15 @@ package com.shelly.Models;
 
 import android.graphics.Typeface;
 
-public class TextTransformationUtils {
+public class TextTransformationModel {
     private String FieldValue;
     private String AssignedTag;
     private Typeface TextFont;
     private boolean Selected;
 
-    public TextTransformationUtils() {}
+    public TextTransformationModel() {}
 
-    public TextTransformationUtils(String fieldValue, String assignedTag, Typeface textFont, boolean selected) {
+    public TextTransformationModel(String fieldValue, String assignedTag, Typeface textFont, boolean selected) {
         FieldValue = fieldValue;
         AssignedTag = assignedTag;
         TextFont = textFont;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="48dp"
     android:paddingRight="48dp"
-    android:background="@drawable/bg_log_in_activity"
+    android:background="@drawable/bg_activity_log_in"
     tools:context=".Activities.SignUpActivity">
 
     <ImageButton

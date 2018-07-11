@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingRight="48dp"
-    android:background="@drawable/bg_welcome_activity"
+    android:background="@drawable/bg_activity_welcome"
     android:paddingLeft="48dp"
     tools:context=".Activities.WelcomeActivity">
 
