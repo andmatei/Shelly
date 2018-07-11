@@ -191,25 +191,25 @@ public class TestActivity extends AppCompatActivity {
 
         }
 
-        public QuestionItem(String question, List<Element> elements) {
-            Question = question;
-            Elements = elements;
+        public QuestionItem(String Question, List<Element> Elements) {
+            Question = Question;
+            Elements = Elements;
         }
 
         public String getQuestion() {
             return Question;
         }
 
-        public void setQuestion(String question) {
-            Question = question;
+        public void setQuestion(String Question) {
+            this.Question = Question;
         }
 
         public List<Element> getElements() {
             return Elements;
         }
 
-        public void setElements(List<Element> elements) {
-            Elements = elements;
+        public void setElements(List<Element> Elements) {
+            this.Elements = Elements;
         }
 
         @Override
