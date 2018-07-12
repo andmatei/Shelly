@@ -105,14 +105,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeData() {
         Query query = mRefDatabase.child(getString(R.string.dbfield_members)).child(mUser.getUid()).child(getString(R.string.dbfield_members_activities));
-        mRefDatabase.addValueEventListener(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mActivityList = new ArrayList<>();
-                for(DataSnapshot ds : dataSnapshot.
-                        child(getString(R.string.dbfield_members)).
-                        child(mUser.getUid()).
-                        child(getString(R.string.dbfield_members_activities)).getChildren()) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     ActivityStatus activityStatus = ds.getValue(ActivityStatus.class);
                     if(activityStatus !=null) {
                         mFirebaseMethods.advanceActivityStatus(activityStatus, dataSnapshot);

@@ -121,7 +121,7 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
-        mSeekBar.setMax(Constants.NUMBER_OF_EMOJIS);
+        mSeekBar.setMax(Constants.NUMBER_OF_EMOJIS - 1);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -172,7 +172,9 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds:dataSnapshot.getChildren()) {
-                    QuestionItem  questionItem = ds.getValue(QuestionItem.class);
+                    Log.e("ds", "" + ds);
+                    QuestionItem questionItem = ds.getValue(QuestionItem.class);
+                    Log.e("qi", questionItem.toString());
                     mQuestionList.add(questionItem);
                 }
             }
@@ -189,28 +191,27 @@ public class TestActivity extends AppCompatActivity {
         List<Element> Elements;
 
         public QuestionItem() {
-
         }
 
-        public QuestionItem(String Question, List<Element> Elements) {
-            Question = Question;
-            Elements = Elements;
+        public QuestionItem(String question, List<Element> elements) {
+            Question = question;
+            Elements = elements;
         }
 
         public String getQuestion() {
             return Question;
         }
 
-        public void setQuestion(String Question) {
-            this.Question = Question;
+        public void setQuestion(String question) {
+            Question = question;
         }
 
         public List<Element> getElements() {
             return Elements;
         }
 
-        public void setElements(List<Element> Elements) {
-            this.Elements = Elements;
+        public void setElements(List<Element> elements) {
+            Elements = elements;
         }
 
         @Override
