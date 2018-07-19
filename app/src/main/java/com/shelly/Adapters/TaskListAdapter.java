@@ -44,7 +44,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final ActivityTask activityTask = mTaskList.get(position);
         final String mDescriptionCondensed = activityTask.getDescription().substring(0, 25) + "...";
-        final TextTransformationUtils textTransformationUtils = new TextTransformationUtils(mContext);
         final AnimatedVectorDrawable lineToTick = (AnimatedVectorDrawable) mContext.getDrawable(R.drawable.avd_line_to_tick);
         final AnimatedVectorDrawable tickToLine = (AnimatedVectorDrawable) mContext.getDrawable(R.drawable.avd_tick_to_line);
 
@@ -54,7 +53,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
             holder.mCheckTask.setImageDrawable(tickToLine);
             holder.mTaskTitle.setTextColor(mContext.getResources().getColor(R.color.textColor50));
             holder.mTaskDescription.setTextColor(mContext.getResources().getColor(R.color.textColor50));
-            textTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_PUT_STRIKETHROUGH);
+            TextTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_PUT_STRIKETHROUGH);
 
         } else {
             holder.mCheckTask.setImageDrawable(lineToTick);
@@ -69,14 +68,14 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
                         holder.mCheckTask.setImageDrawable(tickToLine);
                         holder.mTaskTitle.setTextColor(mContext.getResources().getColor(R.color.textColor));
                         holder.mTaskDescription.setTextColor(mContext.getResources().getColor(R.color.textColor));
-                        textTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_ERASE_STRIKETHROUGH);
+                        TextTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_ERASE_STRIKETHROUGH);
                         tickToLine.start();
                     } else {
                         holder.mCheckTask.setImageDrawable(lineToTick);
                         holder.mTaskTitle.setTextColor(mContext.getResources().getColor(R.color.textColor50));
                         holder.mTaskDescription.setTextColor(mContext.getResources().getColor(R.color.textColor50));
                         lineToTick.start();
-                        textTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_PUT_STRIKETHROUGH);
+                        TextTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_PUT_STRIKETHROUGH);
                     }
                     mTaskStatusList.set(holder.getAdapterPosition(), !mTaskStatusList.get(holder.getAdapterPosition()));
                 }
@@ -85,7 +84,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
             });
         } else {
             holder.mCheckTask.setOnClickListener(null);
-            textTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_PUT_STRIKETHROUGH);
+            TextTransformationUtils.animateStrikeThrough(holder.mTaskTitle, TextTransformationUtils.CODE_PUT_STRIKETHROUGH);
         }
         holder.mExpandDescription.setOnClickListener(new View.OnClickListener() {
             @Override

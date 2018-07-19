@@ -3,23 +3,23 @@ package com.shelly.Models;
 import java.util.List;
 
 public class EntryContent {
-    private StringBuffer Text;
+    private StringBuilder Text;
     private List<String> Tags;
 
     public EntryContent() {
 
     }
 
-    public EntryContent(StringBuffer text, List<String> tags) {
+    public EntryContent(StringBuilder text, List<String> tags) {
         Text = text;
         Tags = tags;
     }
 
-    public StringBuffer getText() {
+    public StringBuilder getText() {
         return Text;
     }
 
-    public void setText(StringBuffer text) {
+    public void setText(StringBuilder text) {
         Text = text;
     }
 

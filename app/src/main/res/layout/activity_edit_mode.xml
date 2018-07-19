@@ -94,7 +94,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="24dp"
-                android:text="@string/lorem_ipsum_large"
                 android:hint="@string/editmode_hint"
                 android:fontFamily="@font/segoe_ui"
                 android:textSize="16sp"

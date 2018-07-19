@@ -15,6 +15,7 @@ import android.widget.ToggleButton;
 import com.shelly.Models.EntryContent;
 import com.shelly.Models.TextTransformationModel;
 import com.shelly.R;
+import com.shelly.Utils.TextTransformationUtils;
 
 import java.util.List;
 
@@ -117,10 +118,24 @@ public class TextTransformListAdapter extends RecyclerView.Adapter<TextTransform
     }
 
     private void addTag(String tag) {
-        mEntryContent.setText(mEntryContent.getText().append("<" + tag + ">"));
+        /*if(mMode == CODE_SINGLE_CHECK) {
+            int positionFinal = 0, tagLength = 0;
+            for(TextTransformationModel textTransformationModel : mTextTransformList) {
+                int position = mEntryContent.getText().lastIndexOf("<" + textTransformationModel.getAssignedTag() + ">");
+                if(position > positionFinal) {
+                    positionFinal = position;
+                    tagLength = textTransformationModel.getAssignedTag().length();
+                }
+            }
+            mEntryContent.setText(mEntryContent.getText().
+                    replace(positionFinal, positionFinal + tagLength, "").
+                    insert(positionFinal, "<" + tag + ">"));
+        } else {*/
+            mEntryContent.setText(mEntryContent.getText().append("<").append(tag).append(">"));
+        //}
     }
 
     private void removeTag(String tag) {
-        mEntryContent.setText(mEntryContent.getText().append("</" + tag + ">"));
+        mEntryContent.setText(mEntryContent.getText().append("</").append(tag).append(">"));
     }
 }

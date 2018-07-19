@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -27,6 +28,9 @@ import com.shelly.Models.EntryContent;
 import com.shelly.Models.TextTransformationModel;
 import com.shelly.R;
 import com.shelly.Adapters.TextTransformListAdapter;
+import com.shelly.Utils.TextTransformationUtils;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +60,7 @@ public class EditModeActivity extends AppCompatActivity {
     //Variables
     private List<TextTransformationModel> mTextTypeList;
     private List<TextTransformationModel> mTextStyleList;
+    private List<String> mAllTags;
     private EntryContent mEntryContent;
     boolean mTextFormatMenuOpen = false;
 
@@ -85,12 +90,12 @@ public class EditModeActivity extends AppCompatActivity {
         //Variable Binding
         mTextTypeList = new ArrayList<>();
         mTextStyleList = new ArrayList<>();
+        mAllTags = new ArrayList<>();
         mEntryContent = new EntryContent();
         mEntryContent.setTags(new ArrayList<String>());
+        mEntryContent.setText(new StringBuilder());
 
         //Implementing Functionalities
-        mEntryContentET.setText(Html.fromHtml("<b>Hello there...</b>"));
-        mEntryContent.setText(new StringBuffer().append(Html.toHtml(mEntryContentET.getText())));
         initializeTextTransformation();
         mTextTypeAdapter = new TextTransformListAdapter(mTextTypeList, this, 0, mEntryContent);
         mTextStyleAdapter = new TextTransformListAdapter(mTextStyleList, this, 1, mEntryContent);
@@ -99,30 +104,39 @@ public class EditModeActivity extends AppCompatActivity {
         mTextTypeRV.setAdapter(mTextTypeAdapter);
         mTextStyleRV.setAdapter(mTextStyleAdapter);
 
-        mEntryContentET.addTextChangedListener(new TextWatcher() {
+        final TextWatcher textWatcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                /*Log.e("testing", charSequence.toString());
+                Log.e("testing", "" + i);
+                Log.e("testing", "" + i1);
+                Log.e("testing", "" + i2);
+                Log.e("new position", "" + TextTransformationUtils.findNewStartingPosition(mEntryContent.getText(), i, mAllTags));*/
+                int position = TextTransformationUtils.findNewStartingPosition(mEntryContent.getText(), start, mAllTags);
+                int cursorEndPosition = mEntryContentET.getSelectionEnd();
+                if(count > before) {
+                    mEntryContent.setText(mEntryContent.getText().insert(position + before, s.subSequence(start + before, start + count).toString()));
+                } else {
+                    mEntryContent.setText(mEntryContent.getText().replace(position + count, position + before, ""));
+                }
+                Log.e("Content", mEntryContent.getText().toString());
+                mEntryContentET.removeTextChangedListener(this);
+                mEntryContentET.setText(Html.fromHtml(mEntryContent.getText().toString()));
+                mEntryContentET.addTextChangedListener(this);
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged(Editable s) {
 
             }
-        });
+        };
 
-        mSettingsEditMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = mEntryContentET.getText().toString();
-                Log.e("Text", text);
-            }
-        });
+        mEntryContentET.addTextChangedListener(textWatcher);
 
         mExitEditMode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,6 +233,7 @@ public class EditModeActivity extends AppCompatActivity {
         textTransformationModel.setTextFont(SegoeUISemibold);
         textTransformationModel.setSelected(false);
         mTextTypeList.add(textTransformationModel);
+        mAllTags.add("h1");
 
         textTransformationModel = new TextTransformationModel();
         textTransformationModel.setFieldValue("<b>Heading<b>");
@@ -226,6 +241,7 @@ public class EditModeActivity extends AppCompatActivity {
         textTransformationModel.setTextFont(SegoeUI);
         textTransformationModel.setSelected(false);
         mTextTypeList.add(textTransformationModel);
+        mAllTags.add("h3");
 
         textTransformationModel = new TextTransformationModel();
         textTransformationModel.setFieldValue("Body");
@@ -234,6 +250,7 @@ public class EditModeActivity extends AppCompatActivity {
         textTransformationModel.setSelected(true);
         mTextTypeList.add(textTransformationModel);
         mEntryContent.getTags().add(textTransformationModel.getAssignedTag());
+        mAllTags.add("p");
 
         textTransformationModel = new TextTransformationModel();
         textTransformationModel.setFieldValue("<b>B<b>");
@@ -241,6 +258,7 @@ public class EditModeActivity extends AppCompatActivity {
         textTransformationModel.setTextFont(SegoeUI);
         textTransformationModel.setSelected(false);
         mTextStyleList.add(textTransformationModel);
+        mAllTags.add("b");
 
         textTransformationModel = new TextTransformationModel();
         textTransformationModel.setFieldValue("<i>I<i>");
@@ -248,6 +266,7 @@ public class EditModeActivity extends AppCompatActivity {
         textTransformationModel.setTextFont(SegoeUI);
         textTransformationModel.setSelected(false);
         mTextStyleList.add(textTransformationModel);
+        mAllTags.add("i");
 
         textTransformationModel = new TextTransformationModel();
         textTransformationModel.setFieldValue("<u>U<u>");
@@ -255,6 +274,12 @@ public class EditModeActivity extends AppCompatActivity {
         textTransformationModel.setTextFont(SegoeUI);
         textTransformationModel.setSelected(false);
         mTextStyleList.add(textTransformationModel);
+        mAllTags.add("u");
+
+        for(int i = mAllTags.size() - 1; i>= 0; i--) {
+            mAllTags.add("</" + mAllTags.get(i) + ">");
+            mAllTags.set(i, "<" + mAllTags.get(i) + ">");
+        }
 
     }
 }
