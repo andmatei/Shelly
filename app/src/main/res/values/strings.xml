@@ -37,7 +37,7 @@
     <string name="error_password_short">Please enter a minimum 6 character password</string>
     <string name="error_password_match">Passwords don\'t match</string>
     <string name="error_auth">Authentication failed</string>
-    <string name="error_send_email_verification">Couldn't send verification email.</string>
+    <string name="error_send_email_verification">Couldn\'t send verification email.</string>
     <string name="error_email_verification">Email is not verified. Check your email inbox.</string>
     <string name="error_required">Required</string>
     <string name="error_username_exists">Username already exists</string>
